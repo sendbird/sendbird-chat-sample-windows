@@ -1,0 +1,32 @@
+
+// SendBirdExample.h : main header file for the PROJECT_NAME application
+//
+
+#pragma once
+
+#ifndef __AFXWIN_H__
+	#error "include 'stdafx.h' before including this file for PCH"
+#endif
+
+#include "resource.h"		// main symbols
+
+
+// CSendBirdExampleApp:
+// See SendBirdExample.cpp for the implementation of this class
+//
+
+class CSendBirdExampleApp : public CWinApp
+{
+public:
+	CSendBirdExampleApp();
+
+// Overrides
+public:
+	virtual BOOL InitInstance();
+
+// Implementation
+
+	DECLARE_MESSAGE_MAP()
+};
+
+extern CSendBirdExampleApp theApp;
