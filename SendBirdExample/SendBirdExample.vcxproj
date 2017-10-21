@@ -76,23 +76,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>./SendBirdSDK/SendBirdSDK/include;$(IncludePath)</IncludePath>
-    <LibraryPath>./SendBirdSDK/SendBirdSDK/x86/Debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>./SendBirdSDK/include;$(IncludePath)</IncludePath>
+    <LibraryPath>./SendBirdSDK/x86/Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>./SendBirdSDK/SendBirdSDK/include;$(IncludePath)</IncludePath>
-    <LibraryPath>./SendBirdSDK/SendBirdSDK/x64/Debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>./SendBirdSDK/include;$(IncludePath)</IncludePath>
+    <LibraryPath>./SendBirdSDK/x64/Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>./SendBirdSDK/SendBirdSDK/include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
-    <LibraryPath>./SendBirdSDK/SendBirdSDK/x86/Release;$(LibraryPath)</LibraryPath>
+    <IncludePath>./SendBirdSDK/include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>./SendBirdSDK/x86/Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>./SendBirdSDK/SendBirdSDK/include;$(IncludePath)</IncludePath>
-    <LibraryPath>./SendBirdSDK/SendBirdSDK/x64/Release;$(LibraryPath)</LibraryPath>
+    <IncludePath>./SendBirdSDK/include;$(IncludePath)</IncludePath>
+    <LibraryPath>./SendBirdSDK/x64/Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
