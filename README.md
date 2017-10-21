@@ -9,5 +9,5 @@
 
 ## How to run
 
-1. Open `SendBird-Windows\SendBird Sample.sln`.
+Open `SendBird Sample.sln`.
 
