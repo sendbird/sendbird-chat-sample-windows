@@ -1036,7 +1036,7 @@ void CSendBirdExampleDlg::OnBnClickedBtnRefreshMembers()
 	m_CurrGroupChannel->RefreshChannel(new SendBirdRefreshMemberListQueryHandler(this));
 }
 
-class SendBirdExitOpenChannelHandler : public SBDOpenChannelExitInterface {
+class SendBirdExitOpenChannelHandler : public SBDExitOpenChannelInterface {
 public:
 	CSendBirdExampleDlg *dlg;
 

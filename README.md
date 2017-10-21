@@ -9,9 +9,5 @@
 
 ## How to run
 
-1. Clone the repo.
-
-2. Unzip `SendBird-Windows\SendBirdExample\SendBirdSDK.zip` to `SendBird-Windows\SendBirdExample\`.
-
-3. Open `SendBird-Windows\SendBird Sample.sln`.
+1. Open `SendBird-Windows\SendBird Sample.sln`.
 
