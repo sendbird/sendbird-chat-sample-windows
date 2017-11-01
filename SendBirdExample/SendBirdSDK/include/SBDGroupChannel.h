@@ -121,9 +121,9 @@ private:
     
 public:
     /**
-     *  Last message of the channel.
+     *  The Last message's ID of the channel.
      */
-    SBDBaseMessage *last_message;
+	int64_t last_message_id;
     
     /**
      *  Represents the channel is distinct or not.
@@ -168,6 +168,20 @@ public:
      */
     static void CreateChannel(vector<wstring> user_ids, wstring name, bool is_distinct, wstring cover_url, wstring data, wstring custom_type, SBDCreateGroupChannelInterface *completion_handler);
     
+	/**
+	 *  Create a group channel with user IDs with cover image file. The group channel is distinct.
+	 *
+	 *  @param user_ids           The user IDs to be <span>members</span> of the channel.
+	 *  @param name              The name of group channel.
+	 *  @param is_distinct        If true, the channel which has the same users is returned.
+	 *  @param cover_image_file_path          The cover image file path of group channel.
+	 *  @param file_mime_type	The file mime type.
+	 *  @param data              The custom data of group channel.
+	 *  @param custom_type        The custom type of group channel.
+	 *  @param completion_handler The handler interface to execute.
+	 */
+	static void CreateChannel(vector<wstring> user_ids, wstring name, bool is_distinct, wstring cover_image_file_path, wstring file_mime_type, wstring data, wstring custom_type, SBDCreateGroupChannelInterface *completion_handler);
+
     /**
      *  Updates a group channel.
      *
@@ -179,6 +193,19 @@ public:
      *  @param completion_handler The handler interface to execute.
      */
     void UpdateChannel(wstring name, bool is_distinct, wstring cover_url, wstring data, wstring custom_type, SBDUpdateGroupChannelInterface *completion_handler);
+
+	/**
+	 *  Updates a group channel with file path.
+	 *
+	 *  @param name              The name of group channel.
+	 *  @param is_distinct        If true, the channel which has the same users is returned.
+	 *  @param cover_image_file_path          The cover image file path of group channel.
+	 *  @param file_mime_type	The file mime type.
+	 *  @param data              The custom data of group channel.
+	 *  @param custom_type        The custom type of group channel.
+	 *  @param completion_handler The handler interface to execute.
+	 */
+	void UpdateChannel(wstring name, bool is_distinct, wstring cover_image_file_path, wstring file_mime_type, wstring data, wstring custom_type, SBDUpdateGroupChannelInterface *completion_handler);
 
 	/**
 	*  Refreshes this channel instance.
@@ -361,6 +388,13 @@ public:
      *  @param completion_handler The handler interface to execute.
      */
     static void GetChannelCount(SBDMemberStateFilter member_state_filter, SBDGetGroupChannelCountInterface *completion_handler);
+
+	/**
+	 *  Gets the last message of this channel. If there is not the last message, NULL will be returned.
+	 *
+	 *  @return The last message object.
+	 */
+	const SBDBaseMessage *GetLastMessage();
 
 	/**
 	 *  Internal use only.

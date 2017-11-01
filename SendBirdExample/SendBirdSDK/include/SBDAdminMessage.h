@@ -44,6 +44,11 @@ public:
 	 *  Internal use only.
 	 */
 	~SBDAdminMessage() {};
+
+	/**
+	*  Internal use only.
+	*/
+	void Overwrite(SBDAdminMessage *message);
 };
 
 #endif /* SENDBIRD_SBDADMINMESSAGE_H_ */

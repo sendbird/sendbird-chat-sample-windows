@@ -350,6 +350,16 @@ public:
 	static void UpdateCurrentUserInfo(wstring nickname, wstring profile_url, SBDUpdateUserInfoInterface *completion_handler);
 
 	/**
+	 *  Updates the current user's information.
+	 *
+	 *  @param nickname          New nickname.
+	 *  @param profile_image_file_path        New profile image file path.
+	 *  @param mime_type The image file's mime type.
+	 *  @param completion_handler The handler interface to execute.
+	 */
+	static void UpdateCurrentUserInfoWithBinaryProfileImage(wstring nickname, wstring profile_image_file_path, wstring mime_type, SBDUpdateUserInfoInterface *completion_handler);
+
+	/**
 	 *  Creates `SBDUserListQuery` instance for getting a list of all users of this application.
 	 *
 	 *  @return `SBDUserListQuery` instance.

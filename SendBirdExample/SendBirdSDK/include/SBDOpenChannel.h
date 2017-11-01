@@ -120,6 +120,20 @@ public:
      */
     static void CreateChannel(wstring name, wstring channel_url, wstring cover_url, wstring data, vector<wstring> operator_user_ids, wstring custom_type, SBDCreateOpenChannelInterface *completion_handler);
     
+	/**
+	 *  Updates an open channel with properties.
+	 *
+	 *  @param name              The name of the channel.
+	 *  @param channel_url        The channel URL. If the length of url is zero, channel url will be determined randomly.
+	 *  @param cover_image_file_path          The cover image file path.
+	 *  @param file_mime_type          The file mime type.
+	 *  @param data              The data for channel.
+	 *  @param operator_user_ids     The operator userIds of channel.
+	 *  @param custom_type        The custom type for channel.
+	 *  @param completion_handler The handler interface to execute.
+	 */
+	static void CreateChannel(wstring name, wstring channel_url, wstring cover_image_file_path, wstring file_mime_type, wstring data, vector<wstring> operator_user_ids, wstring custom_type, SBDCreateOpenChannelInterface *completion_handler);
+
     /**
      *  Updates an open channel.
      *
@@ -132,6 +146,19 @@ public:
      */
     void UpdateChannel(wstring new_name, wstring new_cover_url, wstring new_data, vector<wstring> new_operator_user_ids, wstring new_custom_type, SBDUpdateOpenChannelInterface *completion_handler);
     
+	/**
+	 *  Updates an open channel.
+	 *
+	 *  @param new_name              The name of the channel.
+	 *  @param new_cover_image_file_path          The cover image file path.
+	 *  @param new_cover_file_mime_type          The file mime type.
+	 *  @param new_data              The data for channel.
+	 *  @param new_operator_user_ids   The operator user IDs of channel.
+	 *  @param new_custom_type        The custom type for channel.
+	 *  @param completion_handler The handler interface to execute.
+	 */
+	void UpdateChannel(wstring new_name, wstring new_cover_image_file_path, wstring new_cover_file_mime_type, wstring new_data, vector<wstring> new_operator_user_ids, wstring new_custom_type, SBDUpdateOpenChannelInterface *completion_handler);
+
     /**
      *  Gets an open channel instance from channel URL.
      *

@@ -100,6 +100,94 @@ public:
 	void RunCallback();
 };
 
+class SBDCreateOpenChannelMPHandler : public SBDApiClientThread {
+public:
+	wstring uri;
+
+	wstring channel_url;
+	wstring channel_name;
+	wstring cover_image_file_path;
+	wstring file_mime_type;
+	wstring data;
+	vector<wstring> operator_user_ids;
+	wstring custom_type;
+
+	SBDRequestInterface *completion_handler;
+
+	SBDCreateOpenChannelMPHandler(wstring uri, wstring channel_url, wstring channel_name, wstring cover_image_file_path, wstring file_mime_type, wstring data, vector<wstring> operator_user_ids, wstring custom_type, SBDRequestInterface *completion_handler);
+
+	void RunCallback();
+};
+
+class SBDUpdateOpenChannelMPHandler : public SBDApiClientThread {
+public:
+	wstring uri;
+	wstring channel_name;
+	wstring cover_image_file_path;
+	wstring file_mime_type;
+	wstring data;
+	vector<wstring> operator_user_ids;
+	wstring custom_type;
+
+	SBDRequestInterface *completion_handler;
+
+	SBDUpdateOpenChannelMPHandler(wstring uri, wstring channel_name, wstring cover_image_file_path, wstring file_mime_type, wstring data, vector<wstring> operator_user_ids, wstring custom_type, SBDRequestInterface *completion_handler);
+
+	void RunCallback();
+};
+
+class SBDCreateGroupChannelMPHandler : public SBDApiClientThread {
+public:
+	wstring uri;
+
+	wstring channel_name;
+	bool is_distinct;
+	wstring cover_image_file_path;
+	wstring file_mime_type;
+	wstring data;
+	vector<wstring> user_ids;
+	wstring custom_type;
+
+	SBDRequestInterface *completion_handler;
+
+	SBDCreateGroupChannelMPHandler(wstring uri, vector<wstring> user_id, wstring channel_name, bool is_distinct, wstring cover_image_file_path, wstring file_mime_type, wstring data, wstring custom_type, SBDRequestInterface *completion_handler);
+
+	void RunCallback();
+};
+
+class SBDUpdateGroupChannelMPHandler : public SBDApiClientThread {
+public:
+	wstring uri;
+
+	wstring channel_name;
+	bool is_distinct;
+	wstring cover_image_file_path;
+	wstring file_mime_type;
+	wstring data;
+	wstring custom_type;
+
+	SBDRequestInterface *completion_handler;
+
+	SBDUpdateGroupChannelMPHandler(wstring uri, wstring channel_name, bool is_distinct, wstring cover_image_file_path, wstring file_mime_type, wstring data, wstring custom_type, SBDRequestInterface *completion_handler);
+
+	void RunCallback();
+};
+
+class SBDUploadFileMPHandler : public SBDApiClientThread {
+public:
+	wstring uri;
+	wstring file_path;
+	wstring file_mime_type;
+	vector<SBDThumbnailSize> thumbnail_sizes;
+	wstring channel_url;
+
+	SBDRequestInterface *completion_handler;
+
+	SBDUploadFileMPHandler(wstring uri, wstring file_path, wstring file_mime_type, vector<SBDThumbnailSize> thumbnail_sizes, wstring channel_url, SBDRequestInterface *completion_handler);
+
+	void RunCallback();
+};
+
 struct SBDResponse {
     char *body;
     size_t len;
@@ -144,7 +232,6 @@ private:
     
 	string BuildBodyForCreatingAndUpdatingMetaData(map<wstring, wstring> meta_data);
 	wstring BuildParameterForGettingChannelMetaData(vector<wstring> keys);
-	string BuildBodyForUpdatingMetaData(map<wstring, wstring> meta_data, bool upsert);
     
 	wstring BuildParameterForLoadingMessagesByTimestamp(int64_t timestamp, int64_t prev_limit, int64_t next_limit, bool include, bool reverse, SBDBaseChannel *channel, SBDMessageTypeFilter message_type, wstring custom_type);
 	wstring BuildParameterForLoadingMessagesByMessageId(int64_t message_id, int64_t prev_limit, int64_t next_limit, bool include, bool reverse, SBDBaseChannel *channel, SBDMessageTypeFilter message_type, wstring custom_type);
@@ -207,14 +294,18 @@ public:
     void GetHostUrl(SBDRequestInterface *completion_handler);
     string GetMimeType();
     void UpdateUserInfo(wstring user_id, wstring nickname, wstring profile_url, SBDRequestInterface *completion_handler);
-    
+	void UpdateCurrentUserInfoWithBinaryProfileImage(wstring user_id, wstring nickname, wstring profile_image_file_path, wstring type, SBDRequestInterface *completion_handler);
     
     void CreateOpenChannel(wstring name, wstring channel_url, wstring cover_url, wstring data, vector<wstring> operator_user_ids, wstring custom_type, SBDRequestInterface *completion_handler);
+	void CreateOpenChannel(wstring name, wstring channel_url, wstring cover_image_file_path, wstring cover_image_file_name, wstring data, vector<wstring> operator_user_ids, wstring custom_type, SBDRequestInterface *completion_handler);
     void UpdateOpenChannel(wstring channel_url, wstring name, wstring cover_url, wstring data, vector<wstring> operator_user_ids, wstring custom_type, SBDRequestInterface *completion_handler);
+	void UpdateOpenChannel(wstring channel_url, wstring name, wstring cover_image_file_path, wstring cover_image_file_mime_type, wstring data, vector<wstring> operator_user_ids, wstring custom_type, SBDRequestInterface *completion_handler);
     void GetOpenChannel(wstring channel_url, SBDRequestInterface *completion_handler);
     
     void CreateGroupChannel(vector<wstring> user_ids, wstring name, bool is_distinct, wstring cover_url, wstring data, wstring custom_type, SBDRequestInterface *completion_handler);
+	void CreateGroupChannel(vector<wstring> user_ids, wstring name, bool is_distinct, wstring cover_image_file_path, wstring file_mime_type, wstring data, wstring custom_type, SBDRequestInterface *completion_handler);
     void UpdateGroupChannel(wstring channel_url, wstring name, bool is_distinct, wstring cover_url, wstring data, wstring custom_type, SBDRequestInterface *completion_handler);
+	void UpdateGroupChannel(wstring channel_url, wstring name, bool is_distinct, wstring cover_image_file_path, wstring file_mime_type, wstring data, wstring custom_type, SBDRequestInterface *completion_handler);
     void GetGroupChannel(wstring channel_url, bool include_member, bool include_read_receipt, SBDRequestInterface *completion_handler);
     void InviteUsers(wstring channel_url, vector<wstring> user_ids, SBDRequestInterface *completion_handler);
     void HideGroupChannel(wstring channel_url, bool hide_prev_messages, SBDRequestInterface *completion_handler);
@@ -268,6 +359,7 @@ public:
     void LoadGroupChannelList(string token, wstring user_id, int64_t limit, bool include_member_list, SBDGroupChannelListOrder order, bool include_empty_channel, vector<wstring> channel_urls_filter, vector<SBDUser> users_filter_exact_match, wstring nickname_contains_filter, vector<SBDUser> users_filter_like_match, SBDGroupChannelListQueryType query_type, wstring custom_type_filter, SBDMemberStateFilter member_state_filter, wstring channel_name_filter, SBDRequestInterface *completion_handler);
     void ResetGroupChannelHistory(wstring channel_url, SBDRequestInterface *completion_handler);
     void GetGroupChannelCount(SBDMemberStateFilter member_state_filter, SBDRequestInterface *completion_handler);
+	void UploadFile(wstring file_path, wstring type, vector<SBDThumbnailSize> thumbnail_sizes, wstring channel_url, SBDRequestInterface *completion_handler);
 };
 
 #endif /* SENDBIRD_SBDAPICLIENT_H_ */

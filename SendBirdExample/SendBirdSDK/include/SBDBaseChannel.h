@@ -452,6 +452,20 @@ public:
      */
     SBDFileMessage *SendFileMessage(wstring url, wstring filename, int64_t size, wstring type, wstring data, wstring custom_type, SBDSendFileMessageInterface *completion_handler);
     
+	/**
+	*  Sends a file message with binary file and <span>custom message type</span>.
+	*
+	*  @param file_path          File<span>path</span>.
+	*  @param type              The type of file.
+	*  @param thumbnail_sizes   Thumbnail sizes. This parameter is the vector of `SBDThumbnailSize` object and works for image file only.
+	*  @param data              Custom <span>data</span>.
+	*  @param custom_type        Custom message type.
+	*  @param completion_handler The handler interface to execute.
+	*
+	*  @return Returns the temporary file message with a request ID. It doesn't have a message ID.
+	*/
+	SBDFileMessage *SendFileMessageWithPath(wstring file_path, wstring type, vector<SBDThumbnailSize> thumbnail_sizes, wstring data, wstring custom_type, SBDSendFileMessageInterface *completion_handler);
+
     /**
      *  Deletes a message. The message's sender has to be the current user.
      *
@@ -690,6 +704,50 @@ public:
      *  @return Returns the temporary file message with a request ID. It doesn't have a message ID.
      */
     SBDFileMessage *CopyFileMessage(SBDFileMessage *message, SBDBaseChannel *target_channel, SBDCopyFileMessageInterface *completion_handler);
+
+	/**
+	 *  Deallocates memory for a message.
+	 * 
+	 *  @param message_id The message ID to be deallocated.
+	 */
+	static void DeallocateMessageById(int64_t message_id);
+
+	/**
+	*  Deallocates memory for a message.
+	*
+	*  @param message_req_id The message's request ID to be deallocated.
+	*/
+	static void DeallocateMessageByRequestId(wstring message_req_id);
+
+	/**
+	 *  Deallocated all memories for all messages.
+	 */
+	static void DeallocateAllMessages();
+
+	/**
+	 *  Internal use only
+	 */
+	static map<int64_t, SBDBaseMessage *> message_id_map;
+
+	/**
+	*  Internal use only
+	*/
+	static map<wstring, SBDBaseMessage *> message_req_id_map;
+
+	/**
+	 *  Internal use only.
+	 */
+	static pthread_mutex_t message_id_map_lock;
+
+	/**
+	 *  Internal use only.
+	 */
+	static pthread_mutex_t message_req_id_map_lock;
+
+	/**
+	 *  Internal use only
+	 */
+	static SBDBaseMessage *UpsertMessage(SBDBaseMessage *msb);
 
 	/**
 	 *  Internal use only
