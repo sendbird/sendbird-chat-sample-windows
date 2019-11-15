@@ -23,7 +23,7 @@ public:
     wstring channel_type;
     
     SBDReadStatus();
-    SBDReadStatus(string dict);
+    SBDReadStatus(const string& dict);
 };
 
 #endif /* SENDBIRD_SBDREADSTATUS_H_ */

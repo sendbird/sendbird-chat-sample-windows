@@ -10,6 +10,7 @@
 #define SENDBIRD_SBDBASEMESSAGE_H_
 
 #include <iostream>
+#include <vector>
 #include "SBDUser.h"
 #include "SBDTypes.h"
 
@@ -52,7 +53,14 @@ public:
 	 */
     wstring channel_type;
 
-    /**
+	SBDMentionType mention_type;
+
+	/**
+	*	Can mention to specific users. If sends a message with this field, the message will be arrived to mentioned users. The default value is null.
+	*/
+	vector<SBDUser> mentioned_users;
+
+	/**
      *  Checks the channel type is open channel or not.
      *
      *  @return Returns true, when this is open channel.
@@ -79,22 +87,22 @@ public:
 	/**
 	 *  Internal use only
 	 */
-	SBDBaseMessage(string dict);
+	SBDBaseMessage(const string& dict);
 
 	/**
 	 *  Internal use only.
 	 */
-	static SBDBaseMessage *BuildFromDict(string dict);
+	static SBDBaseMessage *BuildFromDict(const string& dict);
 
 	/**
 	 *  Internal use only.
 	 */
-	static SBDBaseMessage *Build(string dict, SBDBaseChannel *channel);
+	static SBDBaseMessage *Build(const string& dict, SBDBaseChannel *channel);
 
 	/**
 	 *  Internal use only.
 	 */
-	static SBDBaseMessage *BuildFromData(string data);
+	static SBDBaseMessage *BuildFromData(const string& data);
 };
 
 #endif /* SENDBIRD_SBDBASEMESSAGE_H_ */

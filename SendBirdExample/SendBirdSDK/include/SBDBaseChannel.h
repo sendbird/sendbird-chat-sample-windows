@@ -18,6 +18,7 @@
 #include "SBDUserMessage.h"
 #include "SBDAdminMessage.h"
 #include "SBDFileMessage.h"
+#include "SBDUserMessageParams.h"
 #include "SBDError.h"
 
 #include "SBDTypes.h"
@@ -99,7 +100,7 @@ public:
      @param invitees Invitees.
      @param inviter Inviter. It can be NULL.
      */
-    virtual void InvitationReceived(SBDGroupChannel *channel, vector<SBDUser> invitees, SBDUser inviter) {};
+    virtual void InvitationReceived(SBDGroupChannel *channel, const vector<SBDUser>& invitees, SBDUser inviter) {};
     
     /**
      A callback when user declined the invitation.
@@ -200,7 +201,7 @@ public:
      *
      *  @param channel_url The open channel.
      */
-    virtual void ChannelDeleted(wstring channel_url, SBDChannelType channel_type) {};
+    virtual void ChannelDeleted(const wstring& channel_url, SBDChannelType channel_type) {};
     
     /**
      *  A callback when a message was removed in the channel.
@@ -216,7 +217,7 @@ public:
      @param channel The channel that the meta data was created.
      @param created_meta_data The created meta data.
      */
-	virtual void ChannelMetaDataCreated(SBDBaseChannel *channel, map<wstring, wstring> created_meta_data) {};
+	virtual void ChannelMetaDataCreated(SBDBaseChannel *channel, const map<wstring, wstring>& created_meta_data) {};
     
     /**
      A callback when meta data was updated in the channel.
@@ -224,7 +225,7 @@ public:
      @param channel The channel that the meta data was updated.
      @param updated_meta_data The updated meta data.
      */
-	virtual void ChannelMetaDataUpdated(SBDBaseChannel *channel, map<wstring, wstring> updated_meta_data) {};
+	virtual void ChannelMetaDataUpdated(SBDBaseChannel *channel, const map<wstring, wstring>& updated_meta_data) {};
     
     /**
      A callback when meta data was deleted in the channel.
@@ -232,7 +233,7 @@ public:
      @param channel The channel that the meta data was deleted.
      @param deleted_meta_data The keys of the deleted meta data.
      */
-	virtual void ChannelMetaDataDeleted(SBDBaseChannel *channel, vector<wstring> deleted_meta_data) {};
+	virtual void ChannelMetaDataDeleted(SBDBaseChannel *channel, const vector<wstring>& deleted_meta_data) {};
     
     /**
      A callback when meta counters were created in the channel.
@@ -240,7 +241,7 @@ public:
      @param channel The channel that the meta counters were created.
      @param created_meta_counters The created meta counters.
      */
-	virtual void ChannelMetaCountersCreated(SBDBaseChannel *channel, map<wstring, int64_t> created_meta_counters) {};
+	virtual void ChannelMetaCountersCreated(SBDBaseChannel *channel, const map<wstring, int64_t>& created_meta_counters) {};
     
     /**
      A callback when meta counters were updated in the channel.
@@ -248,7 +249,7 @@ public:
      @param channel The channel that the meta counters were updated.
      @param updated_meta_counters The updated meta counters.
      */
-	virtual void ChannelMetaCountersUpdated(SBDBaseChannel *channel, map<wstring, int64_t> updated_meta_counters) {};
+	virtual void ChannelMetaCountersUpdated(SBDBaseChannel *channel, const map<wstring, int64_t>& updated_meta_counters) {};
     
     /**
      A callback when meta counters were deleted in the channel.
@@ -256,7 +257,16 @@ public:
      @param channel The channel that the meta counters were deleted.
      @param deleted_meta_counters The keys of the deleted meta counters.
      */
-	virtual void ChannelMetaCountersDeleted(SBDBaseChannel *channel, vector<wstring> deleted_meta_counters) {};
+	virtual void ChannelMetaCountersDeleted(SBDBaseChannel *channel, const vector<wstring>& deleted_meta_counters) {};
+
+	/** 
+	 A callback when a mentioned user is received.
+	 
+	 @param channel The channel where the mentioned user is received.
+	 @param message The received message.
+	 */
+	virtual void MentionReceived(SBDBaseChannel* channel, SBDBaseMessage* message) {};
+
 };
 
 class SBDSendUserMessageInterface : public SBDBaseInterface {
@@ -271,32 +281,32 @@ public:
 
 class SBDCreateChannelMetaCountersInterface : public SBDBaseInterface {
 public:
-    virtual void CompletionHandler(map<wstring, int64_t> meta_counters, SBDError *error) {};
+    virtual void CompletionHandler(const map<wstring, int64_t>& meta_counters, SBDError *error) {};
 };
 
 class SBDGetChannelMetaCountersInterface : public SBDBaseInterface {
 public:
-    virtual void CompletionHandler(map<wstring, int64_t> meta_counters, SBDError *error) {};
+    virtual void CompletionHandler(const map<wstring, int64_t>& meta_counters, SBDError *error) {};
 };
 
 class SBDGetChannelAllMetaCountersInterface : public SBDBaseInterface {
 public:
-    virtual void CompletionHandler(map<wstring, int64_t> meta_counters, SBDError *error) {};
+    virtual void CompletionHandler(const map<wstring, int64_t>& meta_counters, SBDError *error) {};
 };
 
 class SBDUpdateChannelMetaCountersInterface : public SBDBaseInterface {
 public:
-    virtual void CompletionHandler(map<wstring, int64_t> meta_counters, SBDError *error) {};
+    virtual void CompletionHandler(const map<wstring, int64_t>& meta_counters, SBDError *error) {};
 };
 
 class SBDIncreaseChannelMetaCountersInterface : public SBDBaseInterface {
 public:
-    virtual void CompletionHandler(map<wstring, int64_t> meta_counters, SBDError *error) {};
+    virtual void CompletionHandler(const map<wstring, int64_t>& meta_counters, SBDError *error) {};
 };
 
 class SBDDecreaseChannelMetaCountersInterface : public SBDBaseInterface {
 public:
-    virtual void CompletionHandler(map<wstring, int64_t> meta_counters, SBDError *error) {};
+    virtual void CompletionHandler(const map<wstring, int64_t>& meta_counters, SBDError *error) {};
 };
 
 class SBDDeleteChannelMetaCounterInterface : public SBDBaseInterface {
@@ -311,22 +321,22 @@ public:
 
 class SBDCreateChannelMetaDataInterface : public SBDBaseInterface {
 public:
-    virtual void CompletionHandler(map<wstring, wstring> meta_data, SBDError *error) {};
+    virtual void CompletionHandler(const map<wstring, wstring>& meta_data, SBDError *error) {};
 };
 
 class SBDGetChannelMetaDataInterface : public SBDBaseInterface {
 public:
-    virtual void CompletionHandler(map<wstring, wstring> meta_data, SBDError *error) {};
+    virtual void CompletionHandler(const map<wstring, wstring>& meta_data, SBDError *error) {};
 };
 
 class SBDGetChannelAllMetaDataInterface : public SBDBaseInterface {
 public:
-    virtual void CompletionHandler(map<wstring, wstring> meta_data, SBDError *error) {};
+    virtual void CompletionHandler(const map<wstring, wstring>& meta_data, SBDError *error) {};
 };
 
 class SBDUpdateChannelMetaDataInterface : public SBDBaseInterface {
 public:
-    virtual void CompletionHandler(map<wstring, wstring> meta_data, SBDError *error) {};
+    virtual void CompletionHandler(const map<wstring, wstring>& meta_data, SBDError *error) {};
 };
 
 class SBDDeleteChannelMetaDataInterface : public SBDBaseInterface {
@@ -356,7 +366,7 @@ public:
 
 class SBDGetMessagesInterface : public SBDBaseInterface {
 public:
-    virtual void CompletionHandler(vector<SBDBaseMessage *> messages, SBDError *error) {};
+    virtual void CompletionHandler(const vector<SBDBaseMessage *>& messages, SBDError *error) {};
 };
 
 class SBDCopyUserMessageInterface : public SBDBaseInterface {
@@ -433,9 +443,17 @@ public:
      *
      *  @return Returns the temporary user message with a request ID. It doesn't have a message ID.
      */
-    SBDUserMessage *SendUserMessage(wstring message, wstring data, wstring custom_type, vector<wstring> target_languages, SBDSendUserMessageInterface *completion_handler);
-    
-    // TODO: SendFileMessage with binary data.
+	SBDUserMessage * SendUserMessage(const wstring & message, const wstring & data, const wstring & custom_type, const vector<wstring> & target_languages, SBDSendUserMessageInterface * completion_handler);
+
+	/**
+	*  Sends a user message with <span>params</span>.
+	*
+	*  @param params           The message params
+	*  @param completion_handler The handler interface to execute.
+	*
+	*  @return Returns the temporary user message with a request ID. It doesn't have a message ID.
+	*/
+	SBDUserMessage *SendUserMessage(SBDUserMessageParams params, SBDSendUserMessageInterface* completion_handler);
     
     /**
      *  Sends a file message with file URL and <span>custom message type</span>.
@@ -450,7 +468,7 @@ public:
      *
      *  @return Returns the temporary file message with a request ID. It doesn't have a message ID.
      */
-    SBDFileMessage *SendFileMessage(wstring url, wstring filename, int64_t size, wstring type, wstring data, wstring custom_type, SBDSendFileMessageInterface *completion_handler);
+    SBDFileMessage *SendFileMessage(const wstring& url, const wstring& filename, int64_t size, const wstring& type, const wstring& data, const wstring& custom_type, SBDSendFileMessageInterface *completion_handler);
     
 	/**
 	*  Sends a file message with binary file and <span>custom message type</span>.
@@ -464,7 +482,7 @@ public:
 	*
 	*  @return Returns the temporary file message with a request ID. It doesn't have a message ID.
 	*/
-	SBDFileMessage *SendFileMessageWithPath(wstring file_path, wstring type, vector<SBDThumbnailSize> thumbnail_sizes, wstring data, wstring custom_type, SBDSendFileMessageInterface *completion_handler);
+	SBDFileMessage *SendFileMessageWithPath(const wstring& file_path, const wstring& type, vector<SBDThumbnailSize> thumbnail_sizes, const wstring& data, const wstring& custom_type, SBDSendFileMessageInterface *completion_handler);
 
     /**
      *  Deletes a message. The message's sender has to be the current user.
@@ -483,7 +501,7 @@ public:
      *  @param custom_type        New custom type.
      *  @param completion_handler The handler interface to execute.
      */
-    void UpdateUserMessage(SBDUserMessage *message, wstring message_text, wstring data, wstring custom_type, SBDUpdateUserMessageInterface *completion_handler);
+    void UpdateUserMessage(SBDUserMessage *message, const wstring& message_text, const wstring& data, const wstring& custom_type, SBDUpdateUserMessageInterface *completion_handler);
     
     /**
      *  Updates a file message. The data and custom type can be updated.
@@ -493,7 +511,7 @@ public:
      *  @param custom_type        New custom type.
      *  @param completion_handler The handler interface to execute.
      */
-    void UpdateFileMessage(SBDFileMessage *message, wstring data, wstring custom_type, SBDUpdateFileMessageInterface *completion_handler);
+    void UpdateFileMessage(SBDFileMessage *message, const wstring& data, const wstring& custom_type, SBDUpdateFileMessageInterface *completion_handler);
     
     /**
      *  Creates `SBDPreviousMessageListQuery` instance for getting the previous messages list of the channel.
@@ -508,7 +526,7 @@ public:
      *  @param meta_counters      The meta counters to be set.
      *  @param completion_handler The handler interface to execute.
      */
-    void CreateMetaCounters(map<wstring, int64_t> meta_counters, SBDCreateChannelMetaCountersInterface *completion_handler);
+    void CreateMetaCounters(const map<wstring, int64_t>& meta_counters, SBDCreateChannelMetaCountersInterface *completion_handler);
     
     /**
      *  Gets the meta counters with keys for the channel.
@@ -516,7 +534,7 @@ public:
      *  @param keys              The keys to get meta counters.
      *  @param completion_handler The handler interface to execute.
      */
-    void GetMetaCounters(vector<wstring> keys, SBDGetChannelMetaCountersInterface *completion_handler);
+    void GetMetaCounters(const vector<wstring>& keys, SBDGetChannelMetaCountersInterface *completion_handler);
     
     /**
      *  Gets all meta counters for the channel.
@@ -531,7 +549,7 @@ public:
      *  @param meta_counters      The meta counters to be updated.
      *  @param completion_handler The handler interface to execute.
      */
-    void UpdateMetaCounters(map<wstring, int64_t> meta_counters, SBDUpdateChannelMetaCountersInterface *completion_handler);
+    void UpdateMetaCounters(const map<wstring, int64_t>& meta_counters, SBDUpdateChannelMetaCountersInterface *completion_handler);
     
     /**
      *  Increases the meta counters for the channel.
@@ -539,7 +557,7 @@ public:
      *  @param meta_counters      The meta counters to be increased.
      *  @param completion_handler The handler interface to execute.
      */
-    void IncreaseMetaCounters(map<wstring, int64_t> meta_counters, SBDIncreaseChannelMetaCountersInterface *completion_handler);
+    void IncreaseMetaCounters(const map<wstring, int64_t>& meta_counters, SBDIncreaseChannelMetaCountersInterface *completion_handler);
     
     /**
      *  Decreases the meta counters for the channel.
@@ -547,7 +565,7 @@ public:
      *  @param meta_counters      The meta counters to be decreased.
      *  @param completion_handler The handler interface to execute.
      */
-    void DecreaseMetaCounters(map<wstring, int64_t> meta_counters, SBDDecreaseChannelMetaCountersInterface *completion_handler);
+    void DecreaseMetaCounters(const map<wstring, int64_t>& meta_counters, SBDDecreaseChannelMetaCountersInterface *completion_handler);
     
     /**
      *  Deletes the meta counters with key for the channel.
@@ -555,7 +573,7 @@ public:
      *  @param key               The key to be deleted.
      *  @param completion_handler The handler interface to execute.
      */
-    void DeleteMetaCounter(wstring key, SBDDeleteChannelMetaCounterInterface *completion_handler);
+    void DeleteMetaCounter(const wstring& key, SBDDeleteChannelMetaCounterInterface *completion_handler);
     
     /**
      *  Deletes all meta counters for the channel.
@@ -571,7 +589,7 @@ public:
      *  @param meta_data          The meta <span>data</span> to be set.
      *  @param completion_handler The handler interface to execute.
      */
-    void CreateMetaData(map<wstring, wstring> meta_data, SBDCreateChannelMetaDataInterface *completion_handler);
+    void CreateMetaData(const map<wstring, wstring>& meta_data, SBDCreateChannelMetaDataInterface *completion_handler);
     
     /**
      *  Gets the meta <span>data</span> for the channel.
@@ -579,7 +597,7 @@ public:
      *  @param keys              The keys to get meta <span>data</span>.
      *  @param completion_handler The handler interface to execute.
      */
-    void GetMetaData(vector<wstring> keys, SBDGetChannelMetaDataInterface *completion_handler);
+    void GetMetaData(const vector<wstring>& keys, SBDGetChannelMetaDataInterface *completion_handler);
     
     /**
      *  Gets all meta <span>data</span> for the channel.
@@ -594,7 +612,7 @@ public:
      *  @param meta_data          The meta <span>data</span> to be updated.
      *  @param completion_handler The handler interface to execute.
      */
-    void UpdateMetaData(map<wstring, wstring> meta_data, SBDUpdateChannelMetaDataInterface *completion_handler);
+    void UpdateMetaData(const map<wstring, wstring>& meta_data, SBDUpdateChannelMetaDataInterface *completion_handler);
     
     /**
      *  Deletes meta <span>data</span> with key for the channel.
@@ -602,7 +620,7 @@ public:
      *  @param key               The key to be deleted.
      *  @param completion_handler The handler interface to execute.
      */
-    void DeleteMetaData(wstring key, SBDDeleteChannelMetaDataInterface *completion_handler);
+    void DeleteMetaData(const wstring& key, SBDDeleteChannelMetaDataInterface *completion_handler);
     
     /**
      *  Deletes all meta <span>data</span> for the channel.
@@ -621,7 +639,7 @@ public:
      *  @param custom_type        Custom type to filter messages. If filtering isn't required, set `SBD_NULL_STRING`.
      *  @param completion_handler The handler interface to execute.
      */
-    void GetNextMessagesByTimestamp(int64_t timestamp, int64_t next_limit, bool reverse, SBDMessageTypeFilter message_type, wstring custom_type, SBDGetMessagesInterface *completion_handler);
+    void GetNextMessagesByTimestamp(int64_t timestamp, int64_t next_limit, bool reverse, SBDMessageTypeFilter message_type, const wstring& custom_type, SBDGetMessagesInterface *completion_handler);
     
     /**
      *  Gets the previous messages by the timestamp with a limit and ordering.
@@ -633,7 +651,7 @@ public:
      *  @param custom_type        Custom type to filter messages. If filtering isn't required, set `SBD_NULL_STRING`.
      *  @param completion_handler The handler interface to execute.
      */
-    void GetPreviousMessagesByTimestamp(int64_t timestamp, int64_t prev_limit, bool reverse, SBDMessageTypeFilter message_type, wstring custom_type, SBDGetMessagesInterface *completion_handler);
+    void GetPreviousMessagesByTimestamp(int64_t timestamp, int64_t prev_limit, bool reverse, SBDMessageTypeFilter message_type, const wstring& custom_type, SBDGetMessagesInterface *completion_handler);
     
     /**
      *  Gets the previous and next message by the timestamp with a limit and ordering.
@@ -646,7 +664,7 @@ public:
      *  @param custom_type        Custom type to filter messages. If filtering isn't required, set `SBD_NULL_STRING`.
      *  @param completion_handler The handler interface to execute.
      */
-    void GetMessagesByTimestamp(int64_t timestamp, int64_t prev_limit, int64_t next_limit, bool reverse, SBDMessageTypeFilter message_type, wstring custom_type, SBDGetMessagesInterface *completion_handler);
+    void GetMessagesByTimestamp(int64_t timestamp, int64_t prev_limit, int64_t next_limit, bool reverse, SBDMessageTypeFilter message_type, const wstring& custom_type, SBDGetMessagesInterface *completion_handler);
     
     /**
      *  Gets the next messages by the message ID with a limit and ordering.
@@ -658,7 +676,7 @@ public:
      *  @param custom_type        Custom type to filter messages. If filtering isn't required, set `SBD_NULL_STRING`.
      *  @param completion_handler The handler interface to execute.
      */
-    void GetNextMessagesByMessageId(int64_t message_id, int64_t next_limit, bool reverse, SBDMessageTypeFilter message_type, wstring custom_type, SBDGetMessagesInterface *completion_handler);
+    void GetNextMessagesByMessageId(int64_t message_id, int64_t next_limit, bool reverse, SBDMessageTypeFilter message_type, const wstring& custom_type, SBDGetMessagesInterface *completion_handler);
     
     /**
      *  Gets the previous messages by the message ID with a limit and ordering.
@@ -670,7 +688,7 @@ public:
      *  @param custom_type        Custom type to filter messages. If filtering isn't required, set `SBD_NULL_STRING`.
      *  @param completion_handler The handler interface to execute.
      */
-    void GetPreviousMessagesByMessageId(int64_t message_id, int64_t prev_limit, bool reverse, SBDMessageTypeFilter message_type, wstring custom_type, SBDGetMessagesInterface *completion_handler);
+    void GetPreviousMessagesByMessageId(int64_t message_id, int64_t prev_limit, bool reverse, SBDMessageTypeFilter message_type, const wstring& custom_type, SBDGetMessagesInterface *completion_handler);
     
     /**
      *  Gets the previous and next message by the message ID with a limit and ordering.
@@ -683,7 +701,7 @@ public:
      *  @param custom_type        Custom type to filter messages. If filtering isn't required, set `SBD_NULL_STRING`.
      *  @param completion_handler The handler interface to execute.
      */
-    void GetMessagesByMessageId(int64_t message_id, int64_t prev_limit, int64_t next_limit, bool reverse, SBDMessageTypeFilter message_type, wstring custom_type, SBDGetMessagesInterface *completion_handler);
+    void GetMessagesByMessageId(int64_t message_id, int64_t prev_limit, int64_t next_limit, bool reverse, SBDMessageTypeFilter message_type, const wstring& custom_type, SBDGetMessagesInterface *completion_handler);
     
     /**
      *  Copies a user message to the target channel.
@@ -717,7 +735,7 @@ public:
 	*
 	*  @param message_req_id The message's request ID to be deallocated.
 	*/
-	static void DeallocateMessageByRequestId(wstring message_req_id);
+	static void DeallocateMessageByRequestId(const wstring& message_req_id);
 
 	/**
 	 *  Deallocated all memories for all messages.
@@ -752,7 +770,7 @@ public:
 	/**
 	 *  Internal use only
 	 */
-	SBDBaseChannel(string dict);
+	SBDBaseChannel(const string& dict);
 
 	/**
 	 *  Internal use only

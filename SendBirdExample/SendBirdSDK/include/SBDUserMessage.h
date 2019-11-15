@@ -69,7 +69,7 @@ public:
 	/**
 	 *  Internal use only.
 	 */
-	SBDUserMessage(string dict);
+	SBDUserMessage(const string& dict);
 
 	/**
 	 *  Internal use only.

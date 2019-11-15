@@ -75,7 +75,7 @@ typedef enum {
     SBDErrorRequestFailed = 800220,
     SBDErrorFileUploadCancelFailed = 800230,
     SBDErrorFileUploadCancelled = 800240,
-} SDBErrorCode;
+} SBDErrorCode;
 
 /**
  *  Connection state
@@ -195,4 +195,11 @@ typedef enum {
     SBDMessageTypeAdmin = 2,
 } SBDMessageType;
 
+/**
+*	Mention type.
+*/
+typedef enum {
+	SBDMentionTypeChannel = 0,
+	SBDMentionTypeUsers = 1,
+} SBDMentionType;
 #endif /* SENDBIRD_SBDTYPES_H_ */

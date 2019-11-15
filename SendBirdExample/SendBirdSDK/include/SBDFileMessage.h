@@ -30,7 +30,7 @@ public:
 
 class SBDThumbnail {
 public:
-	SBDThumbnail(int64_t max_width, int64_t max_height, int64_t real_width, int64_t real_height, wstring url, bool require_auth);
+	SBDThumbnail(int64_t max_width, int64_t max_height, int64_t real_width, int64_t real_height, const wstring& url, bool require_auth);
 
 	/**
 	 *  Gets thumbnail's url.
@@ -116,7 +116,7 @@ public:
 	/**
 	 *  Internal use only.
 	 */
-	SBDFileMessage(string dict);
+	SBDFileMessage(const string& dict);
 
 	/**
 	 *  Internal use only.

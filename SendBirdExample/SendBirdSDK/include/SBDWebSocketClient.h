@@ -99,7 +99,7 @@ public:
     
     ~SBDWebSocketClient();
 
-    void StartWebSocket(wstring host);
+    void StartWebSocket(const wstring& host);
     SBDWebSocketClientInterface *event_handler;
     SBDDisconnectInterface *disconnect_completion_handler;
     

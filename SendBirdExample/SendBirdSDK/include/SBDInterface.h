@@ -66,7 +66,7 @@ public:
 
 	void RunCompletionHandler(SBDUser user, SBDError *error);
     
-    virtual void ConnectToWebSocketServerCompletionHandler(SBDUser user, SBDError *error) {};
+    virtual void ConnectToWebSocketServerCompletionHandler(SBDUser user, SBDError* error) {};
 };
 
 class SBDSendCommandInterface : public SBDBaseInterface {

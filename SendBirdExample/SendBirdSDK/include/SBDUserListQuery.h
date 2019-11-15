@@ -19,7 +19,7 @@
 
 class SBDLoadNextUserListInterface : public SBDBaseInterface {
 public:
-    virtual void CompletionHandler(vector<SBDUser> users, SBDError *error) {};
+    virtual void CompletionHandler(const vector<SBDUser>& users, SBDError *error) {};
 };
 
 /**
@@ -66,7 +66,7 @@ public:
 	 *  @param key The key of the meta data to use for filter.
 	 *  @param values The values of the meta data to use for filter.
 	 */
-    void SetMetaDataFilter(wstring key, vector<wstring> values);
+    void SetMetaDataFilter(const wstring& key, const vector<wstring>& values);
     
 	/**
 	 *  Gets the list of users. If this method is repeatedly called, it will retrieve the following pages of the user list.
@@ -103,7 +103,7 @@ public:
 	/**
 	 *  Internal use only.
 	 */
-	SBDUserListQuery(vector<wstring> user_ids);
+	SBDUserListQuery(const vector<wstring>& user_ids);
 
 private:
     void LoadAllUserListNextPage(SBDLoadNextUserListInterface *completion_handler);

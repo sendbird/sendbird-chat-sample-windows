@@ -166,7 +166,7 @@ public:
      *  @param custom_type        The custom type of group channel.
      *  @param completion_handler The handler interface to execute.
      */
-    static void CreateChannel(vector<wstring> user_ids, wstring name, bool is_distinct, wstring cover_url, wstring data, wstring custom_type, SBDCreateGroupChannelInterface *completion_handler);
+    static void CreateChannel(vector<wstring> user_ids, const wstring& name, bool is_distinct, const wstring& cover_url, const wstring& data, const wstring& custom_type, SBDCreateGroupChannelInterface *completion_handler);
     
 	/**
 	 *  Create a group channel with user IDs with cover image file. The group channel is distinct.
@@ -180,7 +180,7 @@ public:
 	 *  @param custom_type        The custom type of group channel.
 	 *  @param completion_handler The handler interface to execute.
 	 */
-	static void CreateChannel(vector<wstring> user_ids, wstring name, bool is_distinct, wstring cover_image_file_path, wstring file_mime_type, wstring data, wstring custom_type, SBDCreateGroupChannelInterface *completion_handler);
+	static void CreateChannel(const vector<wstring> user_ids, const wstring& name, bool is_distinct, const wstring& cover_image_file_path, const wstring& file_mime_type, const wstring& data, const wstring& custom_type, SBDCreateGroupChannelInterface *completion_handler);
 
     /**
      *  Updates a group channel.
@@ -192,7 +192,7 @@ public:
      *  @param custom_type        The custom type of group channel.
      *  @param completion_handler The handler interface to execute.
      */
-    void UpdateChannel(wstring name, bool is_distinct, wstring cover_url, wstring data, wstring custom_type, SBDUpdateGroupChannelInterface *completion_handler);
+    void UpdateChannel(const wstring& name, bool is_distinct, const wstring& cover_url, const wstring& data, const wstring& custom_type, SBDUpdateGroupChannelInterface *completion_handler);
 
 	/**
 	 *  Updates a group channel with file path.
@@ -205,7 +205,7 @@ public:
 	 *  @param custom_type        The custom type of group channel.
 	 *  @param completion_handler The handler interface to execute.
 	 */
-	void UpdateChannel(wstring name, bool is_distinct, wstring cover_image_file_path, wstring file_mime_type, wstring data, wstring custom_type, SBDUpdateGroupChannelInterface *completion_handler);
+	void UpdateChannel(const wstring& name, bool is_distinct, const wstring& cover_image_file_path, const wstring& file_mime_type, const wstring& data, const wstring& custom_type, SBDUpdateGroupChannelInterface *completion_handler);
 
 	/**
 	*  Refreshes this channel instance.
@@ -227,7 +227,7 @@ public:
      *  @param channel_url        The channel URL.
      *  @param completion_handler The handler interface to execute.
      */
-    static void GetChannelFromServer(wstring channel_url, SBDGetGroupChannelFromServerInterface *completion_handler);
+    static void GetChannelFromServer(const wstring& channel_url, SBDGetGroupChannelFromServerInterface *completion_handler);
     
     /**
      *  Gets a group channel instance from channel URL asynchronously.
@@ -235,7 +235,7 @@ public:
      *  @param channel_url        The channel URL.
      *  @param completion_handler The handler interface to execute.
      */
-    static void GetChannel(wstring channel_url, SBDGetGroupChannelInterface *completion_handler);
+    static void GetChannel(const wstring& channel_url, SBDGetGroupChannelInterface *completion_handler);
     
     /**
      *  Invites multiple users to the group channel.
@@ -243,7 +243,7 @@ public:
      *  @param users              The users to be invited.
      *  @param completion_handler The handler interface to execute.
      */
-    void InviteUsers(vector<SBDUser> users, SBDInviteUsersInterface *completion_handler);
+    void InviteUsers(const vector<SBDUser>& users, SBDInviteUsersInterface *completion_handler);
     
     /**
      *  Hides the group channel. The channel will be hid from the channel list, but it will be appeared again when the other user send a message in the channel.
@@ -349,7 +349,7 @@ public:
      *  @param user_id User ID.
      *  @return If true, the channel has the member.
      */
-    bool HasMember(wstring user_id);
+    bool HasMember(const wstring& user_id);
     
     /**
      *  Gets member in the channel.
@@ -358,7 +358,7 @@ public:
 	 *  @param member_exist If the member exists, it is true.
      *  @return `SBDUser` object as a member. If there is a member who has the `user_id`, returns NULL.
      */
-    SBDMember GetMember(wstring user_id, bool *member_exist);
+    SBDMember GetMember(const wstring& user_id, bool *member_exist);
 
     /**
      *  Accpets the invitation.
@@ -414,7 +414,7 @@ public:
 	/**
 	 *  Internal use only.
 	 */
-	SBDGroupChannel(string dict);
+	SBDGroupChannel(const string& dict);
 
 	/**
 	 *  Internal use only.
@@ -459,22 +459,22 @@ public:
 	/**
 	 *  Internal use only.
 	 */
-	static void RemoveChannelFromCache(wstring channel_url);
+	static void RemoveChannelFromCache(const wstring& channel_url);
 
 	/**
 	 *  Internal use only.
 	 */
-	static SBDGroupChannel *GetChannelFromCache(wstring channel_url);
+	static SBDGroupChannel *GetChannelFromCache(const wstring& channel_url);
 
 	/**
 	*  Internal use only.
 	*/
-	void UpdateReadReceipt(wstring user_id, int64_t timestamp);
+	void UpdateReadReceipt(const wstring& user_id, int64_t timestamp);
 
 	/**
 	 *  Internal use only.
 	 */
-	static bool HasChannelInCache(wstring channel_url);
+	static bool HasChannelInCache(const wstring& channel_url);
 
 	/**
 	 *  Internal use only.

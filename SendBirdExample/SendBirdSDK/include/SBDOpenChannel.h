@@ -118,7 +118,7 @@ public:
      *  @param custom_type        The custom type for channel.
      *  @param completion_handler The handler interface to execute.
      */
-    static void CreateChannel(wstring name, wstring channel_url, wstring cover_url, wstring data, vector<wstring> operator_user_ids, wstring custom_type, SBDCreateOpenChannelInterface *completion_handler);
+    static void CreateChannel(const wstring& name, const wstring& channel_url, const wstring& cover_url, const wstring& data, const vector<wstring>& operator_user_ids, const wstring& custom_type, SBDCreateOpenChannelInterface *completion_handler);
     
 	/**
 	 *  Updates an open channel with properties.
@@ -132,7 +132,7 @@ public:
 	 *  @param custom_type        The custom type for channel.
 	 *  @param completion_handler The handler interface to execute.
 	 */
-	static void CreateChannel(wstring name, wstring channel_url, wstring cover_image_file_path, wstring file_mime_type, wstring data, vector<wstring> operator_user_ids, wstring custom_type, SBDCreateOpenChannelInterface *completion_handler);
+	static void CreateChannel(const wstring& name, const wstring& channel_url, const wstring& cover_image_file_path, const wstring& file_mime_type, const wstring& data, const vector<wstring>& operator_user_ids, const wstring& custom_type, SBDCreateOpenChannelInterface *completion_handler);
 
     /**
      *  Updates an open channel.
@@ -144,7 +144,7 @@ public:
      *  @param new_custom_type        The custom type for channel.
      *  @param completion_handler The handler interface to execute.
      */
-    void UpdateChannel(wstring new_name, wstring new_cover_url, wstring new_data, vector<wstring> new_operator_user_ids, wstring new_custom_type, SBDUpdateOpenChannelInterface *completion_handler);
+    void UpdateChannel(const wstring& new_name, const wstring& new_cover_url, const wstring& new_data, const vector<wstring>& new_operator_user_ids, const wstring& new_custom_type, SBDUpdateOpenChannelInterface *completion_handler);
     
 	/**
 	 *  Updates an open channel.
@@ -157,7 +157,7 @@ public:
 	 *  @param new_custom_type        The custom type for channel.
 	 *  @param completion_handler The handler interface to execute.
 	 */
-	void UpdateChannel(wstring new_name, wstring new_cover_image_file_path, wstring new_cover_file_mime_type, wstring new_data, vector<wstring> new_operator_user_ids, wstring new_custom_type, SBDUpdateOpenChannelInterface *completion_handler);
+	void UpdateChannel(const wstring& new_name, const wstring& new_cover_image_file_path, const wstring& new_cover_file_mime_type, const wstring& new_data, const vector<wstring>& new_operator_user_ids, const wstring& new_custom_type, SBDUpdateOpenChannelInterface *completion_handler);
 
     /**
      *  Gets an open channel instance from channel URL.
@@ -165,7 +165,7 @@ public:
      *  @param channel_url        The channel URL.
      *  @param completion_handler The handler interface to execute.
      */
-    static void GetChannel(wstring channel_url, SBDGetOpenChannelInterface *completion_handler);
+    static void GetChannel(const wstring& channel_url, SBDGetOpenChannelInterface *completion_handler);
     
     /**
      *  Enters the channel.
@@ -284,12 +284,12 @@ public:
 	/**
 	 *  Internal use only.
 	 */
-	static void RemoveChannelFromCache(wstring channel_url);
+	static void RemoveChannelFromCache(const wstring& channel_url);
 
 	/**
 	 *  Internal use only.
 	 */
-	SBDOpenChannel(string dict);
+	SBDOpenChannel(const string& dict);
 
 	/**
 	 *  Internal use only.
@@ -299,7 +299,7 @@ public:
 	/**
 	 *  Internal use only.
 	 */
-	static SBDOpenChannel *BuildAndUpsert(string dict);
+	static SBDOpenChannel *BuildAndUpsert(const string& dict);
 
 	/**
 	 *  Internal use only.

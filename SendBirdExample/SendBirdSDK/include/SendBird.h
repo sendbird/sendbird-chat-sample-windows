@@ -43,8 +43,8 @@
 
 #define SBD_NULL_STRING "SBD_NULL_STRING_f2648f84e7e941208c8d9df02230a7c8"
 #define SBD_NULL_WSTRING L"SBD_NULL_STRING_f2648f84e7e941208c8d9df02230a7c8"
-#define IsNullString(str) (!((str).compare(SBD_NULL_STRING)))
-#define IsNullWString(str) (!((str).compare(SBD_NULL_WSTRING)))
+#define IsNullString(str) (((str).compare(SBD_NULL_STRING)) == 0)
+#define IsNullWString(str) (((str).compare(SBD_NULL_WSTRING)) == 0)
 
 using namespace std;
 

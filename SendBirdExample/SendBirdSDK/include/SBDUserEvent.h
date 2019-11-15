@@ -26,7 +26,7 @@ public:
 	bool has_blockee;
     int64_t ts;
     
-    SBDUserEvent(string dict);
+    SBDUserEvent(const string& dict);
 };
 
 #endif /* SENDBIRD_SBDUSEREVENT_H_ */

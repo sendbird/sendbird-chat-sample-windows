@@ -38,7 +38,7 @@ public:
 	/**
 	 *  Internal use only.
 	 */
-	SBDAdminMessage(string dict);
+	SBDAdminMessage(const string& dict);
 
 	/**
 	 *  Internal use only.

@@ -81,7 +81,7 @@ public:
      *  @param meta_data          The meta <span>data</span> to be set.
      *  @param completion_handler The handler interface to execute. `meta_data` is the meta <span>data</span> which are set on SendBird server.
      */
-    void CreateMetaData(map<wstring, wstring> meta_data, SBDCreateUserMetaDataInterface *completion_handler);
+    void CreateMetaData(const map<wstring, wstring>& meta_data, SBDCreateUserMetaDataInterface *completion_handler);
     
     /**
      *  Updates the meta <span>data</span> for the current user.
@@ -89,7 +89,7 @@ public:
      *  @param meta_data          The meta <span>data</span> to be updated.
      *  @param completion_handler The handler interface to execute. `meta_data` is the meta <span>data</span> which are updated on SendBird server.
      */
-    void UpdateMetaData(map<wstring, wstring> meta_data, SBDUpdateUserMetaDataInterface *completion_handler);
+    void UpdateMetaData(const map<wstring, wstring>& meta_data, SBDUpdateUserMetaDataInterface *completion_handler);
     
     /**
      *  Deletes meta <span>data</span> with key for the current user.
@@ -97,7 +97,7 @@ public:
      *  @param key               The key to be deleted.
      *  @param completion_handler The handler interface to execute.
      */
-    void DeleteMetaData(wstring key, SBDDeleteUserMetaDataInterface *completion_handler);
+    void DeleteMetaData(const wstring& key, SBDDeleteUserMetaDataInterface *completion_handler);
     
     /**
      *  Deletes all meta <span>data</span> for the current user.
@@ -114,7 +114,7 @@ public:
 	/**
 	 *  Internal use only.
 	 */
-	SBDUser(string dict);
+	SBDUser(const string& dict);
 
 	/**
 	 *  Internal use only.

@@ -50,21 +50,21 @@ public:
      *
      *  @param channel_url The channel url to search.
      */
-    void SetChannelUrlFilter(wstring channel_url);
+    void SetChannelUrlFilter(const wstring& channel_url);
     
     /**
      *  Sets the channel name filter.
      *
      *  @param channel_name The channel name to search.
      */
-    void SetChannelNameFilter(wstring channel_name);
+    void SetChannelNameFilter(const wstring& channel_name);
     
     /**
      *  Sets the custom type filter.
      *
      *  @param custom_type The custom type to search.
      */
-    void SetCustomTypeFilter(wstring custom_type);
+    void SetCustomTypeFilter(const wstring& custom_type);
     
     /**
      *  Gets the list of channels. If this method is repeatedly called, it will retrieve the following pages of the channel list.

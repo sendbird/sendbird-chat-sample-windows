@@ -57,7 +57,7 @@ public:
 	/**
 	 *  Internal use only.
 	 */
-	SBDChannelEvent(string dict);
+	SBDChannelEvent(const string& dict);
 };
 
 #endif /* SENDBIRD_SBDCHANNELEVENT_H_ */

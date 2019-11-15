@@ -15,6 +15,7 @@
 #include <ctime>
 #include <memory>
 #include <stdarg.h>  
+#include <functional>
 
 using namespace std;
 
@@ -33,6 +34,18 @@ public:
 	static string ConvertUnicodeToUTF8(wstring str_uni);
 	static string ConvertUnicodeToMultiByte(wstring str_uni);
 	static wstring ConvertMultiByteToUnicode(string str_multi);
+};
+
+class defer {
+public:
+	defer() = delete;
+	defer(const defer&) = delete;
+	defer(defer&&) = delete;
+	defer(const std::function<void()>& func);
+	~defer();
+
+private:
+	std::function<void()> m_defer;
 };
 
 #endif /* SENDBIRD_SBDUTILS_H_ */

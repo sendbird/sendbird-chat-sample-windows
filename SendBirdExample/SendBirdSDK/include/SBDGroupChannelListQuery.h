@@ -73,7 +73,7 @@ public:
      *
      *  @param custom_type The custom type to search.
      */
-    void SetCustomTypeFilter(wstring custom_type);
+    void SetCustomTypeFilter(const wstring& custom_type);
     
     /**
      *  Sets the member state filter.
@@ -87,21 +87,21 @@ public:
      * 
      *  @param channel_urls The channel urls to search.
      */
-    void SetChannelUrlsFilter(vector<wstring> channel_urls);
+    void SetChannelUrlsFilter(const vector<wstring>& channel_urls);
     
     /**
      *  Sets a filter to return only channels that contains the specified group channel name.
      *
      *  @param channel_name The channel name to search. The query will return the channels include `channel_name`.
      */
-    void SetChannelNameContainsFilter(wstring channel_name);
+    void SetChannelNameContainsFilter(const wstring& channel_name);
     
     /**
      *  Sets the filter with nickname. The group channels which have the member that has nickname are returned by `loadNextPageWithCompletionHandler:`(LIKE search).
      *
      *  @param nickname Nickname to search.
      */
-    void SetNicknameContainsFilter(wstring nickname);
+    void SetNicknameContainsFilter(const wstring& nickname);
    
     /**
      *  Sets the filter with users. The group channels which have the members that contain users are returned by `LoadNextPage()`.
@@ -109,14 +109,14 @@ public:
      *  @param users    Users to search.
      *  @param query_type Logical condition applied to filter. If you pass `SBDGroupChannelListQueryTypeAnd` to `query_type` and A, B to `users`, the channels whose members containing A and B will be returned. If `SBDGroupChannelListQueryTypeOr` is set, the members of the queried channels will be A or B.
 	 */
-    void SetUsersIncludeFilter(vector<SBDUser> users, SBDGroupChannelListQueryType query_type);
+    void SetUsersIncludeFilter(const vector<SBDUser>& users, SBDGroupChannelListQueryType query_type);
     
     /**
      *  Sets the filter with users. The group channels which have the members that have users are returned by `LoadNextPage()`. The channels have the `users` members only.
      *
      *  @param users    Users to search.
      */
-    void SetUsersExactFilter(vector<SBDUser> users);
+    void SetUsersExactFilter(const vector<SBDUser>& users);
     
     /**
      *  Gets the list of channels. If this method is repeatedly called, it will retrieve the following pages of the channel list.

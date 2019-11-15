@@ -6,3 +6,4 @@ SendBirdExample/Release/*
 SendBirdExample/x64/*
 .vs/*
 SendBirdExample/SendBirdSDK.zip
+*.user

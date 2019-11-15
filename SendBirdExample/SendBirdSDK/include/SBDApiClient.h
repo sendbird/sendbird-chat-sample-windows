@@ -53,7 +53,7 @@ public:
     wstring params;
     SBDRequestInterface *completion_handler;
     
-    SBDGetThread(wstring uri, wstring params, SBDRequestInterface *completion_handler);
+    SBDGetThread(const wstring& uri, const wstring& params, SBDRequestInterface *completion_handler);
 
 	void RunCallback();
 };
@@ -73,7 +73,7 @@ public:
     wstring params;
     SBDRequestInterface *completion_handler;
     
-    SBDDeleteThread(wstring uri, wstring params, SBDRequestInterface *completion_handler);
+    SBDDeleteThread(const wstring& uri, const wstring& params, SBDRequestInterface *completion_handler);
 
 	void RunCallback();
 };
@@ -84,7 +84,7 @@ public:
     string body;
     SBDRequestInterface *completion_handler;
 
-    SBDPostThread(wstring uri, string body, SBDRequestInterface *completion_handler);
+    SBDPostThread(const wstring& uri, const string& body, SBDRequestInterface *completion_handler);
 
 	void RunCallback();
 };
@@ -95,7 +95,7 @@ public:
     string body;
     SBDRequestInterface *completion_handler;
     
-    SBDPutThread(wstring uri, string body, SBDRequestInterface *completion_handler);
+    SBDPutThread(const wstring& uri, const string& body, SBDRequestInterface *completion_handler);
 
 	void RunCallback();
 };
@@ -114,7 +114,7 @@ public:
 
 	SBDRequestInterface *completion_handler;
 
-	SBDCreateOpenChannelMPHandler(wstring uri, wstring channel_url, wstring channel_name, wstring cover_image_file_path, wstring file_mime_type, wstring data, vector<wstring> operator_user_ids, wstring custom_type, SBDRequestInterface *completion_handler);
+	SBDCreateOpenChannelMPHandler(const wstring& uri, const wstring& channel_url, const wstring& channel_name, const wstring& cover_image_file_path, const wstring& file_mime_type, const wstring& data, const vector<wstring>& operator_user_ids, const wstring& custom_type, SBDRequestInterface *completion_handler);
 
 	void RunCallback();
 };
@@ -131,7 +131,7 @@ public:
 
 	SBDRequestInterface *completion_handler;
 
-	SBDUpdateOpenChannelMPHandler(wstring uri, wstring channel_name, wstring cover_image_file_path, wstring file_mime_type, wstring data, vector<wstring> operator_user_ids, wstring custom_type, SBDRequestInterface *completion_handler);
+	SBDUpdateOpenChannelMPHandler(const wstring& uri, const wstring& channel_name, const wstring& cover_image_file_path, const wstring& file_mime_type, const wstring& data, const vector<wstring>& operator_user_ids, const wstring& custom_type, SBDRequestInterface *completion_handler);
 
 	void RunCallback();
 };
@@ -150,7 +150,7 @@ public:
 
 	SBDRequestInterface *completion_handler;
 
-	SBDCreateGroupChannelMPHandler(wstring uri, vector<wstring> user_id, wstring channel_name, bool is_distinct, wstring cover_image_file_path, wstring file_mime_type, wstring data, wstring custom_type, SBDRequestInterface *completion_handler);
+	SBDCreateGroupChannelMPHandler(const wstring& uri, const vector<wstring>& user_id, const wstring& channel_name, bool is_distinct, const wstring& cover_image_file_path, const wstring& file_mime_type, const wstring& data, const wstring& custom_type, SBDRequestInterface *completion_handler);
 
 	void RunCallback();
 };
@@ -168,7 +168,7 @@ public:
 
 	SBDRequestInterface *completion_handler;
 
-	SBDUpdateGroupChannelMPHandler(wstring uri, wstring channel_name, bool is_distinct, wstring cover_image_file_path, wstring file_mime_type, wstring data, wstring custom_type, SBDRequestInterface *completion_handler);
+	SBDUpdateGroupChannelMPHandler(const wstring& uri, const wstring& channel_name, bool is_distinct, const wstring& cover_image_file_path, const wstring& file_mime_type, const wstring& data, const wstring& custom_type, SBDRequestInterface *completion_handler);
 
 	void RunCallback();
 };
@@ -183,7 +183,7 @@ public:
 
 	SBDRequestInterface *completion_handler;
 
-	SBDUploadFileMPHandler(wstring uri, wstring file_path, wstring file_mime_type, vector<SBDThumbnailSize> thumbnail_sizes, wstring channel_url, SBDRequestInterface *completion_handler);
+	SBDUploadFileMPHandler(const wstring& uri, const wstring& file_path, const wstring& file_mime_type, const vector<SBDThumbnailSize>& thumbnail_sizes, const wstring& channel_url, SBDRequestInterface *completion_handler);
 
 	void RunCallback();
 };
@@ -196,7 +196,7 @@ struct SBDResponse {
 class SBDRequestInterface : public SBDBaseInterface {
 public:
 	virtual ~SBDRequestInterface() = 0;
-    virtual void RequestCompletionHandler(string res, SBDError *error) {};
+    virtual void RequestCompletionHandler(const string& res, SBDError *error) {};
 };
 
 class SBDApiClient {
@@ -222,48 +222,48 @@ private:
     
     string DefaultBody();
     string DefaultParam();
-    string BuildBodyForUpdatingUserInfo(wstring nickname, wstring profile_url);
-    string BuildBodyForCreatingUpdatingOpenChannel(wstring name, wstring channel_url, wstring cover_url, wstring data, vector<wstring> operator_user_ids, wstring custom_type);
-    wstring BuildParamForLoadingUserList(string token, int64_t limit, vector<wstring> user_ids, wstring meta_data_key, vector<wstring> meta_data_values);
+    string BuildBodyForUpdatingUserInfo(const wstring& nickname, const wstring& profile_url);
+    string BuildBodyForCreatingUpdatingOpenChannel(const wstring& name, const wstring& channel_url, const wstring& cover_url, const wstring& data, const vector<wstring>& operator_user_ids, const wstring& custom_type);
+    wstring BuildParamForLoadingUserList(const string& token, int64_t limit, const vector<wstring>& user_ids, const wstring& meta_data_key, const vector<wstring>& meta_data_values);
     
-    string BuildBodyForCreatingMetaCounters(map<wstring, int64_t> meta_counters);
-	wstring BuildParameterForGettingOpenChannelMetaCounters(vector<wstring> keys);
-	string BuildBodyForUpdatingMetaCounters(map<wstring, int64_t> meta_counters, SBDChannelMetaCountersUpdateMode update_mode, bool upsert);
+    string BuildBodyForCreatingMetaCounters(const map<wstring, int64_t>& meta_counters);
+	wstring BuildParameterForGettingOpenChannelMetaCounters(const vector<wstring>& keys);
+	string BuildBodyForUpdatingMetaCounters(const map<wstring, int64_t>& meta_counters, SBDChannelMetaCountersUpdateMode update_mode, bool upsert);
     
-	string BuildBodyForCreatingAndUpdatingMetaData(map<wstring, wstring> meta_data);
-	wstring BuildParameterForGettingChannelMetaData(vector<wstring> keys);
+	string BuildBodyForCreatingAndUpdatingMetaData(const map<wstring, wstring>& meta_data);
+	wstring BuildParameterForGettingChannelMetaData(const vector<wstring>& keys);
     
-	wstring BuildParameterForLoadingMessagesByTimestamp(int64_t timestamp, int64_t prev_limit, int64_t next_limit, bool include, bool reverse, SBDBaseChannel *channel, SBDMessageTypeFilter message_type, wstring custom_type);
-	wstring BuildParameterForLoadingMessagesByMessageId(int64_t message_id, int64_t prev_limit, int64_t next_limit, bool include, bool reverse, SBDBaseChannel *channel, SBDMessageTypeFilter message_type, wstring custom_type);
+	wstring BuildParameterForLoadingMessagesByTimestamp(int64_t timestamp, int64_t prev_limit, int64_t next_limit, bool include, bool reverse, SBDBaseChannel *channel, SBDMessageTypeFilter message_type, const wstring& custom_type);
+	wstring BuildParameterForLoadingMessagesByMessageId(int64_t message_id, int64_t prev_limit, int64_t next_limit, bool include, bool reverse, SBDBaseChannel *channel, SBDMessageTypeFilter message_type, const wstring& custom_type);
     
-	string BuildBodyForBlockUser(wstring target_id);
+	string BuildBodyForBlockUser(const wstring& target_id);
 	string BuildBodyForSettingAutoAcceptInvitation(bool auto_accept);
     
 	wstring BuildParameterForGettingGroupChannel(bool include_member, bool include_read_receipt);
     
-	string BuildBodyForCreatingUpdatingGroupChannel(wstring name, bool is_distinct, wstring cover_url, wstring data, vector<wstring> user_ids, wstring custom_type);
-	string BuildBodyForInvitationUsers(vector<wstring> user_ids);
-	string BuildBodyForHidingGroupChannel(wstring user_id, bool hide_prev_messages);
-	string BuildBodyForLeavingGroupChannel(wstring user_id);
+	string BuildBodyForCreatingUpdatingGroupChannel(const wstring& name, bool is_distinct, const wstring& cover_url, const wstring& data, const vector<wstring>& user_ids, const wstring& custom_type);
+	string BuildBodyForInvitationUsers(const vector<wstring>& user_ids);
+	string BuildBodyForHidingGroupChannel(const wstring& user_id, bool hide_prev_messages);
+	string BuildBodyForLeavingGroupChannel(const wstring& user_id);
 
-	string BuildBodyForBanUser(wstring user_id, wstring description, int seconds);
-	string BuildBodyForMuteUser(wstring user_id);
+	string BuildBodyForBanUser(const wstring& user_id, const wstring& description, int seconds);
+	string BuildBodyForMuteUser(const wstring& user_id);
     
-	string BuildBodyForCreatingUpdatingUserMetaData(map<wstring, wstring> meta_data);
+	string BuildBodyForCreatingUpdatingUserMetaData(const map<wstring, wstring>& meta_data);
     
-	wstring BuildParameterForLoadingOpenChannelList(string token, int64_t limit, wstring channel_name_filter, wstring channel_url_filter, wstring custom_type_filter);
-	wstring BuildParameterForLoadingGroupChannelList(string token, wstring user_id, int64_t limit, bool include_member_list, SBDGroupChannelListOrder order, bool include_empty_channel, vector<wstring> channel_urls_filter, vector<SBDUser> users_filter_exact_match, wstring nickname_contains_filter, vector<SBDUser> users_filter_like_match, SBDGroupChannelListQueryType query_type, wstring custom_type_filter, SBDMemberStateFilter member_state_filter, wstring channel_name_filter);
-	wstring BuildParamForLoadingBlockedUserList(string token, int64_t limit);
-	wstring BuildParamForLoadingLoadOpenChannelParticipantList(string token, int64_t limit);
-	wstring BuildParamForLoadingLoadOpenChannelMutedUserList(string token, int64_t limit);
-	wstring BuildParamForLoadingLoadOpenChannelBannedUserList(string token, int64_t limit);
+	wstring BuildParameterForLoadingOpenChannelList(const string& token, int64_t limit, const wstring& channel_name_filter, const wstring& channel_url_filter, const wstring& custom_type_filter);
+	wstring BuildParameterForLoadingGroupChannelList(const string& token, const wstring& user_id, int64_t limit, bool include_member_list, SBDGroupChannelListOrder order, bool include_empty_channel, const vector<wstring>& channel_urls_filter, const vector<SBDUser>& users_filter_exact_match, const wstring& nickname_contains_filter, const vector<SBDUser>& users_filter_like_match, SBDGroupChannelListQueryType query_type, const wstring& custom_type_filter, SBDMemberStateFilter member_state_filter, const wstring& channel_name_filter);
+	wstring BuildParamForLoadingBlockedUserList(const string& token, int64_t limit);
+	wstring BuildParamForLoadingLoadOpenChannelParticipantList(const string& token, int64_t limit);
+	wstring BuildParamForLoadingLoadOpenChannelMutedUserList(const string& token, int64_t limit);
+	wstring BuildParamForLoadingLoadOpenChannelBannedUserList(const string& token, int64_t limit);
 	wstring BuildParameterForGettingGroupChannelCount(SBDMemberStateFilter member_state_filter);
     
-    void Get(wstring uri, wstring params, SBDRequestInterface *completion_handler);
+    void Get(const wstring& uri, const wstring& params, SBDRequestInterface *completion_handler);
 	void GetForRouting(SBDRequestInterface *completion_handler);
-    void Delete(wstring uri, wstring params, SBDRequestInterface *completion_handler);
-    void Put(wstring uri, string body, SBDRequestInterface *completion_handler);
-    void Post(wstring uri, string body, SBDRequestInterface *completion_handler);
+    void Delete(const wstring& uri, const wstring& params, SBDRequestInterface *completion_handler);
+    void Put(const wstring& uri, const string& body, SBDRequestInterface *completion_handler);
+    void Post(const wstring& uri, const string& body, SBDRequestInterface *completion_handler);
     
 public:
     static SBDApiClient& GetInstance() {
@@ -283,7 +283,7 @@ public:
     SBDApiClient(SBDApiClient const&) = delete;
     void operator=(SBDApiClient const&) = delete;
     
-    static void Init(wstring application_id, wstring version);
+    static void Init(const wstring& application_id, const wstring& version);
     
     string GetSessionKey();
     void SetSessionKey(string session_key);
@@ -293,73 +293,73 @@ public:
     void ClearEKey();
     void GetHostUrl(SBDRequestInterface *completion_handler);
     string GetMimeType();
-    void UpdateUserInfo(wstring user_id, wstring nickname, wstring profile_url, SBDRequestInterface *completion_handler);
-	void UpdateCurrentUserInfoWithBinaryProfileImage(wstring user_id, wstring nickname, wstring profile_image_file_path, wstring type, SBDRequestInterface *completion_handler);
+    void UpdateUserInfo(const wstring& user_id, const wstring& nickname, const wstring& profile_url, SBDRequestInterface *completion_handler);
+	void UpdateCurrentUserInfoWithBinaryProfileImage(const wstring& user_id, const wstring& nickname, const wstring& profile_image_file_path, const wstring& type, SBDRequestInterface *completion_handler);
     
-    void CreateOpenChannel(wstring name, wstring channel_url, wstring cover_url, wstring data, vector<wstring> operator_user_ids, wstring custom_type, SBDRequestInterface *completion_handler);
-	void CreateOpenChannel(wstring name, wstring channel_url, wstring cover_image_file_path, wstring cover_image_file_name, wstring data, vector<wstring> operator_user_ids, wstring custom_type, SBDRequestInterface *completion_handler);
-    void UpdateOpenChannel(wstring channel_url, wstring name, wstring cover_url, wstring data, vector<wstring> operator_user_ids, wstring custom_type, SBDRequestInterface *completion_handler);
-	void UpdateOpenChannel(wstring channel_url, wstring name, wstring cover_image_file_path, wstring cover_image_file_mime_type, wstring data, vector<wstring> operator_user_ids, wstring custom_type, SBDRequestInterface *completion_handler);
-    void GetOpenChannel(wstring channel_url, SBDRequestInterface *completion_handler);
+    void CreateOpenChannel(const wstring& name, const wstring& channel_url, const wstring& cover_url, const wstring& data, const vector<wstring>& operator_user_ids, const wstring& custom_type, SBDRequestInterface *completion_handler);
+	void CreateOpenChannel(const wstring& name, const wstring& channel_url, const wstring& cover_image_file_path, const wstring& cover_image_file_name, const wstring& data, const vector<wstring>& operator_user_ids, const wstring& custom_type, SBDRequestInterface *completion_handler);
+    void UpdateOpenChannel(const wstring& channel_url, const wstring& name, const wstring& cover_url, const wstring& data, const vector<wstring>& operator_user_ids, const wstring& custom_type, SBDRequestInterface *completion_handler);
+	void UpdateOpenChannel(const wstring& channel_url, const wstring& name, const wstring& cover_image_file_path, const wstring& cover_image_file_mime_type, const wstring& data, const vector<wstring>& operator_user_ids, const wstring& custom_type, SBDRequestInterface *completion_handler);
+    void GetOpenChannel(const wstring& channel_url, SBDRequestInterface *completion_handler);
     
-    void CreateGroupChannel(vector<wstring> user_ids, wstring name, bool is_distinct, wstring cover_url, wstring data, wstring custom_type, SBDRequestInterface *completion_handler);
-	void CreateGroupChannel(vector<wstring> user_ids, wstring name, bool is_distinct, wstring cover_image_file_path, wstring file_mime_type, wstring data, wstring custom_type, SBDRequestInterface *completion_handler);
-    void UpdateGroupChannel(wstring channel_url, wstring name, bool is_distinct, wstring cover_url, wstring data, wstring custom_type, SBDRequestInterface *completion_handler);
-	void UpdateGroupChannel(wstring channel_url, wstring name, bool is_distinct, wstring cover_image_file_path, wstring file_mime_type, wstring data, wstring custom_type, SBDRequestInterface *completion_handler);
-    void GetGroupChannel(wstring channel_url, bool include_member, bool include_read_receipt, SBDRequestInterface *completion_handler);
-    void InviteUsers(wstring channel_url, vector<wstring> user_ids, SBDRequestInterface *completion_handler);
-    void HideGroupChannel(wstring channel_url, bool hide_prev_messages, SBDRequestInterface *completion_handler);
-    void LeaveGroupChannel(wstring channel_url, SBDRequestInterface *completion_handler);
+    void CreateGroupChannel(const vector<wstring>& user_ids, const wstring& name, bool is_distinct, const wstring& cover_url, const wstring& data, const wstring& custom_type, SBDRequestInterface *completion_handler);
+	void CreateGroupChannel(const vector<wstring>& user_ids, const wstring& name, bool is_distinct, const wstring& cover_image_file_path, const wstring& file_mime_type, const wstring& data, const wstring& custom_type, SBDRequestInterface *completion_handler);
+    void UpdateGroupChannel(const wstring& channel_url, const wstring& name, bool is_distinct, const wstring& cover_url, const wstring& data, const wstring& custom_type, SBDRequestInterface *completion_handler);
+	void UpdateGroupChannel(const wstring& channel_url, const wstring& name, bool is_distinct, const wstring& cover_image_file_path, const wstring& file_mime_type, const wstring& data, const wstring& custom_type, SBDRequestInterface *completion_handler);
+    void GetGroupChannel(const wstring& channel_url, bool include_member, bool include_read_receipt, SBDRequestInterface *completion_handler);
+    void InviteUsers(const wstring& channel_url, const vector<wstring>& user_ids, SBDRequestInterface *completion_handler);
+    void HideGroupChannel(const wstring& channel_url, bool hide_prev_messages, SBDRequestInterface *completion_handler);
+    void LeaveGroupChannel(const wstring& channel_url, SBDRequestInterface *completion_handler);
     void MarkAllGroupChannelAsRead(SBDRequestInterface *completion_handler);
 
-    void LoadUserList(string token, int64_t limit, vector<wstring> user_ids, wstring meta_data_key, vector<wstring> meta_data_values, SBDRequestInterface *completion_handler);
-    void LoadBlockedUserList(wstring blocker_user_id, string token, int64_t limit, SBDRequestInterface *completion_handler);
-    void LoadOpenChannelParticipantList(wstring channel_url, string token, int64_t limit, SBDRequestInterface *completion_handler);
-    void LoadOpenChannelMutedUserList(wstring channel_url, string token, int64_t limit, SBDRequestInterface *completion_handler);
-    void LoadOpenChannelBannedUserList(wstring channel_url, string token, int64_t limit, SBDRequestInterface *completion_handler);
+    void LoadUserList(const string& token, int64_t limit, const vector<wstring>& user_ids, const wstring& meta_data_key, const vector<wstring>& meta_data_values, SBDRequestInterface *completion_handler);
+    void LoadBlockedUserList(const wstring& blocker_user_id, const string& token, int64_t limit, SBDRequestInterface *completion_handler);
+    void LoadOpenChannelParticipantList(const wstring& channel_url, const string& token, int64_t limit, SBDRequestInterface *completion_handler);
+    void LoadOpenChannelMutedUserList(const wstring& channel_url, const string& token, int64_t limit, SBDRequestInterface *completion_handler);
+    void LoadOpenChannelBannedUserList(const wstring& channel_url, const string& token, int64_t limit, SBDRequestInterface *completion_handler);
     
     void DeleteMessage(SBDBaseChannel *channel, int64_t message_id, SBDRequestInterface *completion_handler);
     
-    void CreateMetaCounters(SBDBaseChannel *channel, map<wstring, int64_t> meta_counters, SBDRequestInterface *completion_handler);
-    void GetMetaCounters(SBDBaseChannel *channel, vector<wstring> keys, SBDRequestInterface *completion_handler);
+    void CreateMetaCounters(SBDBaseChannel *channel, const map<wstring, int64_t>& meta_counters, SBDRequestInterface *completion_handler);
+    void GetMetaCounters(SBDBaseChannel *channel, const vector<wstring>& keys, SBDRequestInterface *completion_handler);
     void GetAllMetaCounters(SBDBaseChannel *channel, SBDRequestInterface *completion_handler);
-    void UpdateMetaCounters(SBDBaseChannel *channel, map<wstring, int64_t> meta_counters, SBDChannelMetaCountersUpdateMode update_mode, bool upsert, SBDRequestInterface *completion_handler);
-    void DeleteMetaCounter(SBDBaseChannel *channel, wstring key, SBDRequestInterface *complete_handler);
+    void UpdateMetaCounters(SBDBaseChannel *channel, const map<wstring, int64_t>& meta_counters, SBDChannelMetaCountersUpdateMode update_mode, bool upsert, SBDRequestInterface *completion_handler);
+    void DeleteMetaCounter(SBDBaseChannel *channel, const wstring& key, SBDRequestInterface *complete_handler);
     void DeleteAllMetaCounters(SBDBaseChannel *channel, SBDRequestInterface *complete_handler);
     
-    void CreateMetaData(SBDBaseChannel *channel, map<wstring, wstring> meta_data, SBDRequestInterface *completion_handler);
-    void GetMetaData(SBDBaseChannel *channel, vector<wstring> keys, SBDRequestInterface *completion_handler);
+    void CreateMetaData(SBDBaseChannel *channel, const map<wstring, wstring>& meta_data, SBDRequestInterface *completion_handler);
+    void GetMetaData(SBDBaseChannel *channel, const vector<wstring>& keys, SBDRequestInterface *completion_handler);
     void GetAllMetaData(SBDBaseChannel *channel, SBDRequestInterface *completion_handler);
-    void UpdateMetaData(SBDBaseChannel *channel, map<wstring, wstring> meta_data, bool upsert, SBDRequestInterface *completion_handler);
-    void DeleteMetaData(SBDBaseChannel *channel, wstring key, SBDRequestInterface *completion_handler);
+    void UpdateMetaData(SBDBaseChannel *channel, const map<wstring, wstring>& meta_data, bool upsert, SBDRequestInterface *completion_handler);
+    void DeleteMetaData(SBDBaseChannel *channel, const wstring& key, SBDRequestInterface *completion_handler);
     void DeleteAllMetaData(SBDBaseChannel *channel, SBDRequestInterface *completion_handler);
     
-    void LoadMessagesByTimestamp(int64_t timestamp, int64_t prev_limit, int64_t next_limit, bool include, bool reverse, SBDBaseChannel *channel, SBDMessageTypeFilter message_type, wstring custom_type, SBDRequestInterface *completion_handler);
-    void LoadMessagesByMessageId(int64_t message_id, int64_t prev_limit, int64_t next_limit, bool include, bool reverse, SBDBaseChannel *channel, SBDMessageTypeFilter message_type, wstring custom_type, SBDRequestInterface *completion_handler);
+    void LoadMessagesByTimestamp(int64_t timestamp, int64_t prev_limit, int64_t next_limit, bool include, bool reverse, SBDBaseChannel *channel, SBDMessageTypeFilter message_type, const wstring& custom_type, SBDRequestInterface *completion_handler);
+    void LoadMessagesByMessageId(int64_t message_id, int64_t prev_limit, int64_t next_limit, bool include, bool reverse, SBDBaseChannel *channel, SBDMessageTypeFilter message_type, const wstring& custom_type, SBDRequestInterface *completion_handler);
     
-    void BlockUser(wstring blocker_id, wstring blockee_id, SBDRequestInterface *completion_handler);
-    void UnblockUser(wstring blocker_id, wstring blockee_id, SBDRequestInterface *completion_handler);
+    void BlockUser(const wstring& blocker_id, const wstring& blockee_id, SBDRequestInterface *completion_handler);
+    void UnblockUser(const wstring& blocker_id, const wstring& blockee_id, SBDRequestInterface *completion_handler);
     void SetAutoAcceptInvitation(bool auto_accept, SBDRequestInterface *completion_handler);
     void GetAutoAcceptInvitation(SBDRequestInterface *completion_handler);
     
-    void AcceptInvitation(wstring channel_url, SBDRequestInterface *completion_handler);
-    void DeclineInvitation(wstring channel_url, SBDRequestInterface *completion_handler);
+    void AcceptInvitation(const wstring& channel_url, SBDRequestInterface *completion_handler);
+    void DeclineInvitation(const wstring& channel_url, SBDRequestInterface *completion_handler);
     
-    void BanUser(wstring user_id, wstring channel_url, wstring description, int seconds, SBDRequestInterface *completion_handler);
-    void UnbanUser(wstring user_id, wstring channel_url, SBDRequestInterface *completion_handler);
-    void MuteUser(wstring user_id, wstring channel_url, SBDRequestInterface *completion_handler);
-    void UnmuteUser(wstring user_id, wstring channel_url, SBDRequestInterface *completion_handler);
+    void BanUser(const wstring& user_id, const wstring& channel_url, const wstring& description, int seconds, SBDRequestInterface *completion_handler);
+    void UnbanUser(const wstring& user_id, const wstring& channel_url, SBDRequestInterface *completion_handler);
+    void MuteUser(const wstring& user_id, const wstring& channel_url, SBDRequestInterface *completion_handler);
+    void UnmuteUser(const wstring& user_id, const wstring& channel_url, SBDRequestInterface *completion_handler);
     
-    void CreateUserMetaData(wstring user_id, map<wstring, wstring> meta_data, SBDRequestInterface *completion_handler);
-    void UpdateUserMetaData(wstring user_id, map<wstring, wstring> meta_data, SBDRequestInterface *completion_handler);
-    void DeleteUserMetaData(wstring user_id, wstring key, SBDRequestInterface *completion_handler);
-    void DeleteAllUserMetaData(wstring user_id, SBDRequestInterface *completion_handler);
+    void CreateUserMetaData(const wstring& user_id, const map<wstring, wstring>& meta_data, SBDRequestInterface *completion_handler);
+    void UpdateUserMetaData(const wstring& user_id, const map<wstring, wstring>& meta_data, SBDRequestInterface *completion_handler);
+    void DeleteUserMetaData(const wstring& user_id, const wstring& key, SBDRequestInterface *completion_handler);
+    void DeleteAllUserMetaData(const wstring& user_id, SBDRequestInterface *completion_handler);
     
-    void LoadOpenChannelList(string token, int64_t limit, wstring channel_name_filter, wstring channel_url_filter, wstring custom_type_filter, SBDRequestInterface *completion_handler);
-    void LoadGroupChannelList(string token, wstring user_id, int64_t limit, bool include_member_list, SBDGroupChannelListOrder order, bool include_empty_channel, vector<wstring> channel_urls_filter, vector<SBDUser> users_filter_exact_match, wstring nickname_contains_filter, vector<SBDUser> users_filter_like_match, SBDGroupChannelListQueryType query_type, wstring custom_type_filter, SBDMemberStateFilter member_state_filter, wstring channel_name_filter, SBDRequestInterface *completion_handler);
-    void ResetGroupChannelHistory(wstring channel_url, SBDRequestInterface *completion_handler);
+    void LoadOpenChannelList(const string& token, int64_t limit, const wstring& channel_name_filter, const wstring& channel_url_filter, const wstring& custom_type_filter, SBDRequestInterface *completion_handler);
+    void LoadGroupChannelList(const string& token, const wstring& user_id, int64_t limit, bool include_member_list, SBDGroupChannelListOrder order, bool include_empty_channel, const vector<wstring>& channel_urls_filter, const vector<SBDUser>& users_filter_exact_match, const wstring& nickname_contains_filter, const vector<SBDUser>& users_filter_like_match, SBDGroupChannelListQueryType query_type, const wstring& custom_type_filter, SBDMemberStateFilter member_state_filter, const wstring& channel_name_filter, SBDRequestInterface *completion_handler);
+    void ResetGroupChannelHistory(const wstring& channel_url, SBDRequestInterface *completion_handler);
     void GetGroupChannelCount(SBDMemberStateFilter member_state_filter, SBDRequestInterface *completion_handler);
-	void UploadFile(wstring file_path, wstring type, vector<SBDThumbnailSize> thumbnail_sizes, wstring channel_url, SBDRequestInterface *completion_handler);
+	void UploadFile(const wstring& file_path, const wstring& type, const vector<SBDThumbnailSize>& thumbnail_sizes, const wstring& channel_url, SBDRequestInterface *completion_handler);
 };
 
 #endif /* SENDBIRD_SBDAPICLIENT_H_ */

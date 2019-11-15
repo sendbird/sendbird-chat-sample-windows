@@ -33,7 +33,7 @@ public:
 	/**
 	 *  Internal use only.
 	 */
-	SBDError(string msg, int64_t c);
+	SBDError(const string& msg, int64_t c);
 };
 
 #endif /* SENDBIRD_SBDERROR_H_ */
