@@ -67,6 +67,12 @@ public:
 	 *  Shows if the query is loading.
 	 */
 	bool is_loading;
+
+	/**
+	*	Sets to filter channels by the hidden state. 
+	*	The default value is SBDChannelHiddenStateFilterUnhiddenOnly.
+	*/
+	SBDChannelHiddenStateFilter channel_hidden_state_filter;
     
     /**
      *  Sets the custom type filter.
@@ -117,6 +123,13 @@ public:
      *  @param users    Users to search.
      */
     void SetUsersExactFilter(const vector<SBDUser>& users);
+
+	/**
+	*	Sets to filter channels by the hidden state. The default value is SBDChannelHiddenStateFilterUnhiddenOnly.
+	*
+	*	@param channel_hidden_state_filter
+	*/
+	void SetChannelHiddenStateFilter(const SBDChannelHiddenStateFilter channel_hidden_state_filter);
     
     /**
      *  Gets the list of channels. If this method is repeatedly called, it will retrieve the following pages of the channel list.

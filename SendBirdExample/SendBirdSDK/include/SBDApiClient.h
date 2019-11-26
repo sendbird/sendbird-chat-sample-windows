@@ -243,7 +243,8 @@ private:
     
 	string BuildBodyForCreatingUpdatingGroupChannel(const wstring& name, bool is_distinct, const wstring& cover_url, const wstring& data, const vector<wstring>& user_ids, const wstring& custom_type);
 	string BuildBodyForInvitationUsers(const vector<wstring>& user_ids);
-	string BuildBodyForHidingGroupChannel(const wstring& user_id, bool hide_prev_messages);
+	string BuildBodyForHidingGroupChannel(const wstring& user_id, bool hide_prev_messages, bool allow_auto_unhide = true);
+
 	string BuildBodyForLeavingGroupChannel(const wstring& user_id);
 
 	string BuildBodyForBanUser(const wstring& user_id, const wstring& description, int seconds);
@@ -252,7 +253,8 @@ private:
 	string BuildBodyForCreatingUpdatingUserMetaData(const map<wstring, wstring>& meta_data);
     
 	wstring BuildParameterForLoadingOpenChannelList(const string& token, int64_t limit, const wstring& channel_name_filter, const wstring& channel_url_filter, const wstring& custom_type_filter);
-	wstring BuildParameterForLoadingGroupChannelList(const string& token, const wstring& user_id, int64_t limit, bool include_member_list, SBDGroupChannelListOrder order, bool include_empty_channel, const vector<wstring>& channel_urls_filter, const vector<SBDUser>& users_filter_exact_match, const wstring& nickname_contains_filter, const vector<SBDUser>& users_filter_like_match, SBDGroupChannelListQueryType query_type, const wstring& custom_type_filter, SBDMemberStateFilter member_state_filter, const wstring& channel_name_filter);
+	
+	wstring BuildParameterForLoadingGroupChannelList(const string& token, const wstring& user_id, int64_t limit, bool include_member_list, SBDGroupChannelListOrder order, bool include_empty_channel, const vector<wstring>& channel_urls_filter, const vector<SBDUser>& users_filter_exact_match, const wstring& nickname_contains_filter, const vector<SBDUser>& users_filter_like_match, SBDGroupChannelListQueryType query_type, const wstring& custom_type_filter, SBDMemberStateFilter member_state_filter, const wstring& channel_name_filter, SBDChannelHiddenStateFilter channel_hidden_state_filter);
 	wstring BuildParamForLoadingBlockedUserList(const string& token, int64_t limit);
 	wstring BuildParamForLoadingLoadOpenChannelParticipantList(const string& token, int64_t limit);
 	wstring BuildParamForLoadingLoadOpenChannelMutedUserList(const string& token, int64_t limit);
@@ -309,7 +311,10 @@ public:
     void GetGroupChannel(const wstring& channel_url, bool include_member, bool include_read_receipt, SBDRequestInterface *completion_handler);
     void InviteUsers(const wstring& channel_url, const vector<wstring>& user_ids, SBDRequestInterface *completion_handler);
     void HideGroupChannel(const wstring& channel_url, bool hide_prev_messages, SBDRequestInterface *completion_handler);
-    void LeaveGroupChannel(const wstring& channel_url, SBDRequestInterface *completion_handler);
+	void HideGroupChannelAllowAutoUnhide(const wstring& channel_url, bool hide_prev_messages, bool allow_auto_unhide, SBDRequestInterface* completion_handler);
+	void UnhideGroupChannel(const wstring& channel_url, SBDRequestInterface* completion_handler);
+
+	void LeaveGroupChannel(const wstring& channel_url, SBDRequestInterface *completion_handler);
     void MarkAllGroupChannelAsRead(SBDRequestInterface *completion_handler);
 
     void LoadUserList(const string& token, int64_t limit, const vector<wstring>& user_ids, const wstring& meta_data_key, const vector<wstring>& meta_data_values, SBDRequestInterface *completion_handler);
@@ -356,8 +361,9 @@ public:
     void DeleteAllUserMetaData(const wstring& user_id, SBDRequestInterface *completion_handler);
     
     void LoadOpenChannelList(const string& token, int64_t limit, const wstring& channel_name_filter, const wstring& channel_url_filter, const wstring& custom_type_filter, SBDRequestInterface *completion_handler);
-    void LoadGroupChannelList(const string& token, const wstring& user_id, int64_t limit, bool include_member_list, SBDGroupChannelListOrder order, bool include_empty_channel, const vector<wstring>& channel_urls_filter, const vector<SBDUser>& users_filter_exact_match, const wstring& nickname_contains_filter, const vector<SBDUser>& users_filter_like_match, SBDGroupChannelListQueryType query_type, const wstring& custom_type_filter, SBDMemberStateFilter member_state_filter, const wstring& channel_name_filter, SBDRequestInterface *completion_handler);
-    void ResetGroupChannelHistory(const wstring& channel_url, SBDRequestInterface *completion_handler);
+	void LoadGroupChannelList(const string& token, const wstring& user_id, int64_t limit, bool include_member_list, SBDGroupChannelListOrder order, bool include_empty_channel, const vector<wstring>& channel_urls_filter, const vector<SBDUser>& users_filter_exact_match, const wstring& nickname_contains_filter, const vector<SBDUser>& users_filter_like_match, SBDGroupChannelListQueryType query_type, const wstring& custom_type_filter, SBDMemberStateFilter member_state_filter, const wstring& channel_name_filter, SBDRequestInterface *completion_handler);
+	void LoadGroupChannelList(const string& token, const wstring& user_id, int64_t limit, bool include_member_list, SBDGroupChannelListOrder order, bool include_empty_channel, const vector<wstring>& channel_urls_filter, const vector<SBDUser>& users_filter_exact_match, const wstring& nickname_contains_filter, const vector<SBDUser>& users_filter_like_match, SBDGroupChannelListQueryType query_type, const wstring& custom_type_filter, SBDMemberStateFilter member_state_filter, const wstring& channel_name_filter, SBDChannelHiddenStateFilter channel_hidden_state_filter, SBDRequestInterface* completion_handler);
+	void ResetGroupChannelHistory(const wstring& channel_url, SBDRequestInterface *completion_handler);
     void GetGroupChannelCount(SBDMemberStateFilter member_state_filter, SBDRequestInterface *completion_handler);
 	void UploadFile(const wstring& file_path, const wstring& type, const vector<SBDThumbnailSize>& thumbnail_sizes, const wstring& channel_url, SBDRequestInterface *completion_handler);
 };

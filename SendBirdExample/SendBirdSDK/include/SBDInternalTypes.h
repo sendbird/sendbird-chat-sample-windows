@@ -39,12 +39,15 @@ typedef enum {
     SBDChannelEventCategoryChannelInvite = 10020,
 //    SBDChannelEventCategoryChannelAcceptInvite = 10021,
     SBDChannelEventCategoryChannelDeclineInvite = 10022,
-    
+
     SBDChannelEventCategoryChannelPropChanged = 11000,
     SBDChannelEventCategoryChannelDeleted = 12000,
     
     SBDChannelEventCategoryMetaDataChanged = 11100,
     SBDChannelEventCategoryMetaCounterChanged = 11200,
+
+	SBDChannelEventCategoryChannelHidden = 13000,
+	SBDChannelEventCategoryChannelUnhidden = 13001,
 } SBDChannelEventCategory;
 
 typedef enum {

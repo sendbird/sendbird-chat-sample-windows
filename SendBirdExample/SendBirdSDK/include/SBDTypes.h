@@ -37,7 +37,7 @@ typedef enum {
     SBDErrorInvalidParameterValueNegative = 400107,
     SBDErrorNonAuthorized = 400108,
     SBDErrorTokenExpired = 400109,
-    SBDErrorInvalidChannelUrl = 400110,
+    SBDErrorParameterValueLengthExceeded = 400110,
     SBDErrorInvalidParameterValue = 400111,
     SBDErrorUnusableCharacterIncluded = 400151,
     SBDErrorNotFoundInDatabase = 400201,
@@ -48,7 +48,7 @@ typedef enum {
     SBDErrorInvalidJsonBody = 400403,
     
     // RESTful API Errors for SDK
-    SBDErrorAppIdNotValid = 400404,
+    SBDErrorInvalidRequestUrl = 400404,
     //SBDErrorAccessTokenEmpty = 400500,
     //SBDErrorAccessTokenNotValid = 400501,
     SBDErrorUserNotExist = 400502,
@@ -202,4 +202,41 @@ typedef enum {
 	SBDMentionTypeChannel = 0,
 	SBDMentionTypeUsers = 1,
 } SBDMentionType;
+
+/**
+ The enum type to filter my group channels with the hidden state.
+
+ - SBDChannelHiddenStateFilterUnhiddenOnly: Shows the unhidden channels only.
+ - SBDChannelHiddenStateFilterHiddenOnly: Shows the hidden channels only.
+ - SBDChannelHiddenStateFilterHiddenAllowAutoUnhide: Shows the channels will be unhidden automatically when there is a new message in the channel.
+ - SBDChannelHiddenStateFilterHiddenPreventAutoUnhide: Shows the channels will not be unhidden automatically.
+*/
+typedef enum {
+	SBDChannelHiddenStateFilterUnHiddenOnly = 0,
+	SBDChannelHiddenStateFilterHiddenOnly = 1,
+	SBDChannelHiddenStateFilterHiddenAllowAutoUnhide = 2,
+	SBDChannelHiddenStateFilterHiddenPreventAutoUnhide = 3,
+} SBDChannelHiddenStateFilter;
+
+typedef enum {
+	SBDGroupChannelHiddenStateUnhidden = 0,
+	SBDGroupChannelHiddenStateAllowAutoUnhide = 1,
+	SBDGroupChannelHiddenStateHiddenPreventAutoUnhide = 2,
+} SBDGroupChannelHiddenState;
+
+/**
+*	Push option for message
+*/
+typedef enum {
+	SBDPushNotificationDeliveryOptionDefault = 0,
+	SBDPushNotificationDeliveryOptionSuppress = 1,
+} SBDPushNotificationDeliveryOption;
+
+/**
+*
+*/
+typedef enum {
+	SBDMetaArrayUpdateModeAdd = 0,
+	SBDMetaArrayUpdateModeRemove = 1,
+} SBDMetaArrayUpdateMode;
 #endif /* SENDBIRD_SBDTYPES_H_ */

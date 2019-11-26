@@ -13,6 +13,7 @@
 #include <vector>
 #include "SBDUser.h"
 #include "SBDTypes.h"
+#include "SBDMessageMetaArray.h"
 
 class SBDBaseChannel;
 
@@ -61,6 +62,11 @@ public:
 	vector<SBDUser> mentioned_users;
 
 	/**
+	* Gets an array of meta arrays sorted by chronological order.
+	*/
+	vector<SBDMessageMetaArray> meta_arrays;
+
+	/**
      *  Checks the channel type is open channel or not.
      *
      *  @return Returns true, when this is open channel.
@@ -73,6 +79,19 @@ public:
      *  @return Returns true, when this is group channel.
      */
     bool IsGroupChannel();
+
+	/**
+	* TODO: MYH.
+	*	
+	*	@Returns an array of meta arrays with keys.
+	*/
+	vector<SBDMessageMetaArray> GetMetaArraysWithKeys(const vector<wstring>& metaarraykeys);
+
+	/**
+	 * TODO: MYH.
+	 *  Internal use only
+	 */
+	SBDMessageMetaArray* GetMetaArrayByKey(wstring key);
 
 	/**
 	 *  Internal use only

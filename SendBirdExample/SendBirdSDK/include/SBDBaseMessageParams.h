@@ -38,6 +38,16 @@ public:
 	vector<wstring> mentioned_user_ids;
 	
 	/**
+	*	Push option for message. If the option is default, push message will work with the receiver's push settings. If the option is suppress, push message will not be sent.
+	*/
+	SBDPushNotificationDeliveryOption pushnotification_delivery_option;
+
+	/**
+	*	Meta array keys.	
+	*/
+	vector<wstring> metaarray_keys;
+
+	/**
 	 *  Internal use only
 	 */
 	SBDBaseMessageParams();

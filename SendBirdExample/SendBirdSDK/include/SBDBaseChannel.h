@@ -267,6 +267,13 @@ public:
 	 */
 	virtual void MentionReceived(SBDBaseChannel* channel, SBDBaseMessage* message) {};
 
+	/**
+	 A callback when the channel was hidden on the other device or by Platform API.
+
+	 @param channel The channel where the channel was hidden.
+	 */
+	virtual void ChannelWasHidden(SBDGroupChannel* channel) {};
+
 };
 
 class SBDSendUserMessageInterface : public SBDBaseInterface {
@@ -377,6 +384,12 @@ public:
 class SBDCopyFileMessageInterface : public SBDBaseInterface {
 public:
     virtual void CompletionHandler(SBDFileMessage *file_message, SBDError *error) {};
+};
+
+// TODO: MYH.
+class SBDMessageMetaArrayInterface : public SBDBaseInterface {
+public:
+	virtual void CompletionHandler(SBDBaseMessage* user_message, SBDError* error) {};
 };
 
 /**
@@ -703,7 +716,29 @@ public:
      */
     void GetMessagesByMessageId(int64_t message_id, int64_t prev_limit, int64_t next_limit, bool reverse, SBDMessageTypeFilter message_type, const wstring& custom_type, SBDGetMessagesInterface *completion_handler);
     
-    /**
+	/** TODO: MYH. 
+	 *
+	 */
+	void AddMessageMetaArrayValues(const wstring& channel_url, int64_t message_id, const map<wstring, vector<wstring>>& key_value, SBDMessageMetaArrayInterface* completion_handler);
+	void AddMessageMetaArrayValues(const wstring& channel_url, int64_t message_id, const vector<SBDMessageMetaArray>& metaarrays, SBDMessageMetaArrayInterface* completion_handler);
+
+	/** TODO: MYH.
+	 *
+	 */
+	void RemoveMessageMetaArrayValues(const wstring& channel_url, int64_t message_id, const map<wstring, vector<wstring>>& key_value, SBDMessageMetaArrayInterface* completion_handler);
+	void RemoveMessageMetaArrayValues(const wstring& channel_url, int64_t message_id, const vector<SBDMessageMetaArray>& metaarrays, SBDMessageMetaArrayInterface* completion_handler);
+
+	/** TODO: MYH.
+	*
+	*/
+	void DeleteMessageMetaArrayKeys(const wstring& channel_url, int64_t message_id, const vector<wstring>& metaarray_keys, SBDMessageMetaArrayInterface* completion_handler);
+
+	/** TODO: MYH.
+	*
+	*/
+	void CreateMessageMetaArrayKeys(const wstring& channel_url, int64_t message_id, const vector<wstring>& metaarray_keys, SBDMessageMetaArrayInterface* completion_handler);
+
+	/**
      *  Copies a user message to the target channel.
      *
      *  @param message User message object.

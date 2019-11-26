@@ -65,6 +65,11 @@ public:
     virtual void CompletionHandler(SBDError *error) {};
 };
 
+class SBDUnhideGroupChannelInterface : public SBDBaseInterface {
+public:
+	virtual void CompletionHandler(SBDError* error) {};
+};
+
 class SBDLeaveGroupChannelInterface : public SBDBaseInterface {
 public:
     virtual void CompletionHandler(SBDError *error) {};
@@ -154,6 +159,16 @@ public:
 	 *  If there is a inviter, true.
 	 */
 	bool has_inviter;
+
+	/**
+	 * Checks this channel is hidden
+	 */
+	bool is_hidden;
+
+	/**
+	 * The hidden state
+	 */
+	SBDGroupChannelHiddenState hidden_state;
 
     /**
      *  Create a group channel with user IDs. The group channel is distinct.
@@ -252,7 +267,19 @@ public:
      *  @param completion_handler The handler interface to execute.
      */
     void HideChannel(bool hide_prev_messages, SBDHideGroupChannelInterface *completion_handler);
-    
+
+	/**
+	*	Hides the group channel with the auto unhide option. The channel will be hid from the channel list. 
+	*	If the allowAutoUnhide is YES, the channel will be appeared again when the other user send a message in the channel. 
+	*	However, if the allowAutoUnhide is NO, the channel will be appeared by UnhideChannel method.
+	*/
+	void HideChannel(bool hide_prev_messages, bool allow_auto_unhide, SBDHideGroupChannelInterface* completion_handler);
+
+    /**
+	*	Unhides the group channel.
+	*/
+	void UnhideChannel(SBDUnhideGroupChannelInterface* completion_handler);
+
     /**
      *  Leaves the group channel. The channel will be disappeared from the channel list. If join the channel, the invitation is required.
      *
@@ -480,6 +507,12 @@ public:
 	 *  Internal use only.
 	 */
 	static int64_t last_mark_all_as_read_ts;
+
+	/**
+	 *  Internal use only.
+	 */
+	void SetChannelHiddenState(SBDGroupChannelHiddenState hidden_state);
+
 };
 
 #endif /* SENDBIRD_SBDGROUPCHANNEL_H_ */

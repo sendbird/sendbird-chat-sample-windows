@@ -46,7 +46,12 @@ public:
     static SBDCommand *BuildEndTyping(SBDGroupChannel *channel, int64_t end_at);
     static SBDCommand *BuildReadMessage(SBDGroupChannel *channel);
     static SBDCommand *BuildUpdateUserMessage(const wstring& channel_url, int64_t message_id, const wstring& message_text, const wstring& data, const wstring& custom_type);
-    static SBDCommand *BuildUpdateFileMessage(const wstring& channel_url, int64_t message_id, const wstring& data, const wstring& custom_type);
+	
+	// TODO: MYH.
+	static SBDCommand *BuildUpdateUserMessage(const wstring& channel_url, int64_t message_id, const SBDUserMessageParams& params);
+	static SBDCommand *BuildUpdateUserMessage(const wstring& channel_url, int64_t message_id, const vector<SBDMessageMetaArray>& metaarrays, SBDMetaArrayUpdateMode mode, bool upsert);
+
+	static SBDCommand *BuildUpdateFileMessage(const wstring& channel_url, int64_t message_id, const wstring& data, const wstring& custom_type);
 
 	string GetFullCommand();
     
