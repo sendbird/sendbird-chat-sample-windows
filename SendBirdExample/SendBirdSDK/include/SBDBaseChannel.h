@@ -488,7 +488,8 @@ public:
 	*
 	*  @param file_path          File<span>path</span>.
 	*  @param type              The type of file.
-	*  @param thumbnail_sizes   Thumbnail sizes. This parameter is the vector of `SBDThumbnailSize` object and works for image file only.
+	*  @param thumbnail_sizes   Thumbnail sizes. This parameter is the vector of `SBDThumbnailSize` object and works 
+    for image file only.
 	*  @param data              Custom <span>data</span>.
 	*  @param custom_type        Custom message type.
 	*  @param completion_handler The handler interface to execute.
@@ -496,6 +497,26 @@ public:
 	*  @return Returns the temporary file message with a request ID. It doesn't have a message ID.
 	*/
 	SBDFileMessage *SendFileMessageWithPath(const wstring& file_path, const wstring& type, vector<SBDThumbnailSize> thumbnail_sizes, const wstring& data, const wstring& custom_type, SBDSendFileMessageInterface *completion_handler);
+
+    /**
+ *  Sends a file message with binary file data and <span>custom message type</span>.
+ *
+ *  @param file_buf          Binary file data.
+ *  @param filename          File<span>name</span>.
+ *  @param size              File size.
+ *  @param type              The type of file.
+ *  @param thumbnail_sizes   Thumbnail sizes. This parameter is the vector of `SBDThumbnailSize` object and works
+    for image file only.
+ *  @param data              Custom <span>data</span>.
+ *  @param custom_type        Custom message type.
+ *  @param completion_handler The handler interface to execute.
+ *
+ *  @return Returns the temporary file message with a request ID. It doesn't have a message ID.
+ *  @since 3.0.11
+ */
+    SBDFileMessage* SendFileMessage(const char* file_buf, const wstring& filename, int64_t size, const wstring& type,
+        vector<SBDThumbnailSize> thumbnail_sizes, const wstring& data, const wstring& custom_type, 
+        SBDSendFileMessageInterface* completion_handler);
 
     /**
      *  Deletes a message. The message's sender has to be the current user.
@@ -811,6 +832,11 @@ public:
 	 *  Internal use only
 	 */
 	SBDBaseChannel();
+
+    /**
+     *  Internal use only
+     */
+    virtual ~SBDBaseChannel();
 };
 
 #endif /* SENDBIRD_SBDBASECHANNEL_H_ */

@@ -513,6 +513,10 @@ public:
 	 */
 	void SetChannelHiddenState(SBDGroupChannelHiddenState hidden_state);
 
+    /**
+     *  Internal use only.
+     */
+    void UpdateMyReadReceipt(int64_t ts);
 };
 
 #endif /* SENDBIRD_SBDGROUPCHANNEL_H_ */

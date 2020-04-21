@@ -30,6 +30,7 @@ public:
 
     bool IsAckRequired();
     bool HasRequestId();
+    int64_t GetTimestamp();
     
     static SBDCommand *BuildCommand(const string& cmd, const string& json_payload, const string& request_id);
     

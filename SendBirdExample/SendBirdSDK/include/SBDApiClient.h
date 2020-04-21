@@ -177,13 +177,18 @@ class SBDUploadFileMPHandler : public SBDApiClientThread {
 public:
 	wstring uri;
 	wstring file_path;
+    const char* file_buf;
+    wstring file_name;
+    int64_t file_size;
 	wstring file_mime_type;
 	vector<SBDThumbnailSize> thumbnail_sizes;
 	wstring channel_url;
 
 	SBDRequestInterface *completion_handler;
 
-	SBDUploadFileMPHandler(const wstring& uri, const wstring& file_path, const wstring& file_mime_type, const vector<SBDThumbnailSize>& thumbnail_sizes, const wstring& channel_url, SBDRequestInterface *completion_handler);
+	SBDUploadFileMPHandler(const wstring& uri, const wstring& file_path, const char* file_buf, const wstring& file_name, int64_t file_size,
+        const wstring& file_mime_type, const vector<SBDThumbnailSize>& thumbnail_sizes, const wstring& channel_url, 
+        SBDRequestInterface *completion_handler);
 
 	void RunCallback();
 };
@@ -365,7 +370,11 @@ public:
 	void LoadGroupChannelList(const string& token, const wstring& user_id, int64_t limit, bool include_member_list, SBDGroupChannelListOrder order, bool include_empty_channel, const vector<wstring>& channel_urls_filter, const vector<SBDUser>& users_filter_exact_match, const wstring& nickname_contains_filter, const vector<SBDUser>& users_filter_like_match, SBDGroupChannelListQueryType query_type, const wstring& custom_type_filter, SBDMemberStateFilter member_state_filter, const wstring& channel_name_filter, SBDChannelHiddenStateFilter channel_hidden_state_filter, SBDRequestInterface* completion_handler);
 	void ResetGroupChannelHistory(const wstring& channel_url, SBDRequestInterface *completion_handler);
     void GetGroupChannelCount(SBDMemberStateFilter member_state_filter, SBDRequestInterface *completion_handler);
-	void UploadFile(const wstring& file_path, const wstring& type, const vector<SBDThumbnailSize>& thumbnail_sizes, const wstring& channel_url, SBDRequestInterface *completion_handler);
+	void UploadFile(const wstring& file_path, const wstring& type, const vector<SBDThumbnailSize>& thumbnail_sizes, 
+        const wstring& channel_url, SBDRequestInterface *completion_handler);
+    void UploadFile(const char* file_buf, const wstring& file_name, int64_t file_size, const wstring& type, 
+        const vector<SBDThumbnailSize>& thumbnail_sizes, const wstring& channel_url, 
+        SBDRequestInterface* completion_handler);
 };
 
 #endif /* SENDBIRD_SBDAPICLIENT_H_ */

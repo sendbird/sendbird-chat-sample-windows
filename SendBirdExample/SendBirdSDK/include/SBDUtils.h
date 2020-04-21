@@ -34,6 +34,8 @@ public:
 	static string ConvertUnicodeToUTF8(wstring str_uni);
 	static string ConvertUnicodeToMultiByte(wstring str_uni);
 	static wstring ConvertMultiByteToUnicode(string str_multi);
+	static void DebugOutput(string fmt_str, ...);
+	static void DebugOutput(wstring fmt_str, ...);
 };
 
 class defer {

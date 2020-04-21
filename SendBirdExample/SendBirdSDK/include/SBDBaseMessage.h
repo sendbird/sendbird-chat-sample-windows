@@ -101,7 +101,7 @@ public:
 	/**
 	 *  Internal use only
 	 */
-	~SBDBaseMessage() {};
+	virtual ~SBDBaseMessage();
 
 	/**
 	 *  Internal use only
